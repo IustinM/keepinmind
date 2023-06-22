@@ -1,12 +1,14 @@
 import React from 'react'
 import Content from '../Content/Content'
-import PlusButton from '../utils/PlusButton'
+import AddBook from './Add/Book/AddBook'
+import MenuContainer from './PlusMenu/MenuContainer'
 
 const Dashboard:React.FC = () => {
   return (
     <div className=' w-full'>
-        <PlusButton/>
-        <Content/>
+        <MenuContainer/>
+        {/* <Content/> */}
+        <AddBook/>
     </div>
   )
 }

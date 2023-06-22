@@ -1,15 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
- import { faGear,faCircle} from '@fortawesome/free-solid-svg-icons'
-import NavItem from './utils/NavItem'
-const Navigation = () => {
-  const navItems = ['Books','Movies','Days']
+import { faGear} from '@fortawesome/free-solid-svg-icons'
+import NavItem from './utils/NavItem';
+
+const Navigation:React.FC = () => {
+
+  const navItems = ['Books','Movies','Days'];
+
   return (
     <div className='w-[300px] bg-default-red min-h-[100vh] flex flex-col justify-around items-center'>
       <div className="flex flex-col text-white justify-center flex-1 w-[70%] mx-auto">
         <div className="text-[2rem]">Hello, User</div>
         <ul className='flex flex-col text-[1.5rem] mt-12 justify-around'>
-          {navItems.map((item:string) => <NavItem title={item} />)}
+          {navItems.map((item:string,index:number) => <NavItem title={item} key={index} />)}
         </ul>
       </div>
       <div className="flex-1 flex items-end pb-10 w-[70%] mx-auto">
