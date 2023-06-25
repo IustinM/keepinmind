@@ -11,7 +11,9 @@ export interface inputValueTypes {
 }
 
 const AddBook:React.FC = () => {
-    const [localValues,setLocalValues] = useState<inputValueTypes[]>([]);
+    const [enjoysValues,setEnjoysValues] = useState<inputValueTypes[]>([]);
+    const [dislikesValues,setDislikesValues] = useState<inputValueTypes[]>([]);
+    const [learnedValues,setLearnedValues] = useState<inputValueTypes[]>([]);
 
   return (
     <div>
@@ -41,25 +43,35 @@ const AddBook:React.FC = () => {
                 <div className="">
                     <div className="w-[400px]">
                         <p className='mb-2 text-[1.2rem]'>What I enjoyed abut this book</p>
-                        <AddText labelText={'What i enjoyed'} inputId={'enjoyed'} localValues={localValues} setLocalValues={setLocalValues}/>
+                        <AddText labelText={'What i enjoyed'} inputId={'enjoyed'} localValues={enjoysValues} setLocalValues={setEnjoysValues}/>
                     </div>
                     <div className="">
-                        {localValues.map((item:inputValueTypes,index:number) =>
-                        <AnimatePresence><TextItem key={item.index} item={item} localValues={localValues} setLocalValues={setLocalValues} /></AnimatePresence>
-                       )}
+                            {enjoysValues.map((item:inputValueTypes) =>
+                                <TextItem key={item.index} item={item} localValues={enjoysValues} setLocalValues={setEnjoysValues} />
+                            )}
                     </div>
                 </div>
-                <div className="w-[400px] mt-[11px] mb-7">
-                    <p className='mb-2 text-[1.2rem]'>What I dislike abut this book</p>
-                    <Input labelText={'What i dislike'} inputId={'title_book'} inputValue={''} setInputValue={function (value: React.SetStateAction<string>): void {
-                          throw new Error('Function not implemented.')
-                      } } />
+                <div className="my-7">
+                    <div className="w-[400px]">
+                        <p className='mb-2 text-[1.2rem]'>What I dislike abut this book</p>
+                        <AddText labelText={'What i dislike'} inputId={'dislikes'} localValues={dislikesValues} setLocalValues={setDislikesValues}/>
+                    </div>
+                    <div className="">
+                            {dislikesValues.map((item:inputValueTypes) =>
+                                <TextItem key={item.index} item={item} localValues={dislikesValues} setLocalValues={setDislikesValues} />
+                            )}
+                    </div>
                 </div>
-                <div className="w-[400px]">
-                    <p className='mb-2 text-[1.2rem]'>What i have learned</p>
-                    <Input labelText={'Learned'} inputId={'title_book'} inputValue={''} setInputValue={function (value: React.SetStateAction<string>): void {
-                          throw new Error('Function not implemented.')
-                      } } />
+                <div className="">
+                    <div className="w-[400px]">
+                        <p className='mb-2 text-[1.2rem]'>What I learned from this book</p>
+                        <AddText labelText={'What i learned'} inputId={'learns'} localValues={learnedValues} setLocalValues={setLearnedValues}/>
+                    </div>
+                    <div className="">
+                            {learnedValues.map((item:inputValueTypes) =>
+                                <TextItem key={item.index} item={item} localValues={learnedValues} setLocalValues={setLearnedValues} />
+                            )}
+                    </div>
                 </div>
             </div>
         </div>

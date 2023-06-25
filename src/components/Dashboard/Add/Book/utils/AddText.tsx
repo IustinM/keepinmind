@@ -11,6 +11,7 @@ interface Props{
     localValues:inputValueTypes[],
     setLocalValues:React.Dispatch<React.SetStateAction<inputValueTypes[]>>
 }
+
 const AddText:React.FC<Props> = ({labelText,inputId,localValues,setLocalValues}) => {
 
     const [localInputValue,setLocalInputValue] = useState<string>('');
@@ -21,7 +22,6 @@ const AddText:React.FC<Props> = ({labelText,inputId,localValues,setLocalValues})
         }
     }
     
-
     return (
         <div className="flex w-[400px]">
 
