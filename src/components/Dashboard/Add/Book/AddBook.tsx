@@ -4,6 +4,7 @@ import Textarea from '../../../Navigation/utils/Textarea'
 import AddText from './utils/AddText'
 import TextItem from './utils/TextItem'
 import { AnimatePresence } from 'framer-motion'
+import Feeling from './utils/Feeling'
 
 export interface inputValueTypes {
     text:string,
@@ -75,7 +76,14 @@ const AddBook:React.FC = () => {
                 </div>
             </div>
         </div>
-      
+        {/* <div className="w-[80%] mx-auto mt-6">
+            <h2 className="text-[1.3rem]">Book Feeling</h2>
+            <Feeling title={'Sad'}/>
+        </div>
+       */}
+       <div className=" flex justify-center mt-10">
+            <button className='w-[250px] bg-default-red h-[40px] text-white rounded-[0.5rem]'>Add Book</button>
+       </div>
     </div>
   )
 }
