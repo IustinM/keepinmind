@@ -33,6 +33,9 @@ const Input:React.FC<Props> = ({labelText,inputId,inputValue,setInputValue,speci
     useEffect(()=>{
         if(inputValue.length <= 0){
             setActiveInput(false);
+        }else{
+            setActiveInput(true);
+
         }
     },[inputValue]);
 

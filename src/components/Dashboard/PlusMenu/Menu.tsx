@@ -1,8 +1,11 @@
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from 'framer-motion'
+import { useContext } from 'react';
+import {BookContext} from '../../../context/BookContext';
 
 const Menu = () => {
+    const {setHideBookModal} = useContext(BookContext);
     const variants = {
         hidden: { 
             y:'50%',
@@ -31,7 +34,7 @@ const Menu = () => {
                 <span className='px-3'>Sort</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faFilter}/>
             </div>
-            <div className="py-3 cursor-pointer flex justify-between hover:bg-[#ffffffc8]  transition-all rounded-b-[0.5rem] hover:text-[#0000004f]">
+            <div onClick={()=> setHideBookModal(true)} className="py-3 cursor-pointer flex justify-between hover:bg-[#ffffffc8]  transition-all rounded-b-[0.5rem] hover:text-[#0000004f]">
                 <span className='px-3'>Add item</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faSort}/>
             </div>

@@ -7,9 +7,9 @@ const Navigation:React.FC = () => {
   const navItems = ['Books','Movies','Days'];
 
   return (
-    <div className='w-[300px] bg-default-red min-h-[100vh] flex flex-col justify-around items-center'>
-      <div className="flex flex-col text-white justify-center flex-1 w-[70%] mx-auto">
-        <div className="text-[2rem]">Hello, User</div>
+    <div className='w-[300px] min-h-[100vh] fixed bg-default-red flex flex-col justify-around items-center'>
+      <div className="">KeepInMind</div>
+      <div className="flex flex-col text-white justify-center flex-1 w-[70%] mx-auto"> 
         <ul className='flex flex-col text-[1.5rem] mt-12 justify-around'>
           {navItems.map((item:string,index:number) => <NavItem title={item} key={index} />)}
         </ul>

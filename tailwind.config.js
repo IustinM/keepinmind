@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'auto': 'repeat(auto-fit, minmax(300px, 1fr))',
+      }
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -12,6 +16,8 @@ module.exports = {
       'purple': '#3f3cbb',
       'midnight': '#121063',
       'metal': '#565584',
+      'metal-hover': '#565584b5',
+      'bookElementBg':'#7d7d7d97',
       'tahiti': '#3ab7bf',
       'silver': '#ecebff',
       'bubble-gum': '#ff77e9',
