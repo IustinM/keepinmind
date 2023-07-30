@@ -1,9 +1,9 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { memo, useContext, useEffect, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import {BookContext} from '../../../../../context/BookContext';
-import { colors, getRandomInt } from './data';
+import { MovieContext } from '../../../../context/MovieContext';
+import { colors, } from './data';
 
 interface Props{
    
@@ -12,31 +12,25 @@ interface Props{
 const AddFelling:React.FC<Props> =memo(({}) => {
 
     //context
-    const {feelingsValue,setFeelingsValue} = useContext(BookContext);
+    const {feelingsValue,setFeelingsValue} = useContext(MovieContext);
     const backgroundColor = colors[1];
     
     //local state
     const [localFeelingValue,setLocalFeelingValue] = useState<string>('');
-    const [showPlus,setShowPlus] = useState<boolean>(true);
 
+    //handlers -->
     const changeFeelingHandler = (e:React.SyntheticEvent):void =>{
         const target = e.target as HTMLInputElement;
         setLocalFeelingValue(target.value)
     }
-
+    
     const addFeelingHandler = () =>{
         if(feelingsValue.length < 4 && localFeelingValue.length > 0){
             setFeelingsValue([...feelingsValue,{type:localFeelingValue,color:backgroundColor,id:uuid()}])
         }
     }
+    //<-- handlers 
 
-    useEffect(()=>{
-        if(localFeelingValue.length > 0){
-            setShowPlus(false)
-        }else{
-            setShowPlus(true);
-        }
-    },[localFeelingValue])
 
     return (
       <div 

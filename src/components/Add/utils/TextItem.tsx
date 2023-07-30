@@ -2,7 +2,8 @@ import {  faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { inputValueTypes } from '../AddBook'
+import { inputValueTypes } from '../../utils/types'
+
 
 interface Props{
     item:inputValueTypes,

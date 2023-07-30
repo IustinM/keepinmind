@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Textarea from '../../../../Navigation/utils/Textarea';
-import Input from '../../../../utils/Input';
-import Select from '../../../../utils/Select';
+import Textarea from '../../../Navigation/utils/Textarea';
+import Input from '../../../utils/Input';
+import Select from '../../../utils/Select';
 import { days, hours } from './data';
 
-const Page = () => {
+const Reminder = () => {
 
     const [pageDescription,setPageDescription] = useState<string>('');
     const [emailAddress,setEmailAddress] = useState<string>('');
@@ -12,8 +12,7 @@ const Page = () => {
 
   return (
     <div className='w-[400px]'>
-        <h1 className='text-[1.2rem] mt-[2rem] mb-[1rem]'>Add a qoute/text or paragraph from a certain page</h1>
-        <Textarea inputValue={pageDescription} setInputValue={setPageDescription} labelText={'Page description'} inputId={'description_book_page'}/>
+        <h1 className='text-[1.2rem] mt-[2rem] mb-[1rem]'>Add a reminder for this movie</h1>
         
         {
         activeSetReminder &&
@@ -41,4 +40,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default Reminder

@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import React, { useContext, useState } from 'react'
-import { PageContext } from '../../../context/PageContainer';
-import PlusButton from '../../utils/PlusButton'
+import { PageContext } from '../../context/PageContainer';
+import PlusButton from '../utils/PlusButton'
 import Menu from './Menu'
 
 const MenuContainer:React.FC = () => {

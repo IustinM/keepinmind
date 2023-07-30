@@ -30,7 +30,10 @@ module.exports = {
       'editGreen' :'#14a28d',
       'editGreenHover':'#14a28dcd',
       'removeRed':'#c61a1a',
-      'removeRedHover':'#c61a1ace'
+      'removeRedHover':'#c61a1ace',
+      'sky-blue':'#4280dc',
+      'movie-purple':'#8b46ec',
+      'movie-green':'#2cbd8d'
     },
   },
   plugins: [],

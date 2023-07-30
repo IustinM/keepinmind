@@ -1,9 +1,11 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
-import Input from '../../../../utils/Input';
-import { inputValueTypes } from '../AddBook';
+
 import { v4 as uuid } from 'uuid';
+import Input from '../../utils/Input';
+import { inputValueTypes } from '../../utils/types';
+
 
 interface Props{
     labelText:string,

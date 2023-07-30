@@ -9,7 +9,7 @@ interface Props{
     
 }
 
-const BookElement:React.FC<Props> = ({elements,description}) => {
+const Element:React.FC<Props> = ({elements,description}) => {
   return (
     <div className='mb-4'>
     <h2 className='bold text-[1.2rem]'>{description}:</h2>
@@ -22,4 +22,4 @@ const BookElement:React.FC<Props> = ({elements,description}) => {
   )
 }
 
-export default BookElement
+export default Element

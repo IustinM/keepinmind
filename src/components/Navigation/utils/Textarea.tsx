@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface Props{
     labelText:string,
@@ -26,6 +26,15 @@ const Textarea:React.FC<Props> = ({labelText,inputId,inputValue,setInputValue}) 
             setActiveInput(false)
         }
     }
+    useEffect(()=>{
+        if(inputValue.length <= 0){
+            setActiveInput(false);
+        }else{
+            setActiveInput(true);
+
+        }
+    },[inputValue]);
+
     
     return (
         <div className="border-[1px] relative p-[0.1rem] pt-[0.5rem] rounded-[0.3rem]  border-black">

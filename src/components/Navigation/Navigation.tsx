@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear} from '@fortawesome/free-solid-svg-icons'
+import { faBrain, faGear} from '@fortawesome/free-solid-svg-icons'
 import NavItem from './utils/NavItem';
 
 const Navigation:React.FC = () => {
@@ -8,9 +8,12 @@ const Navigation:React.FC = () => {
 
   return (
     <div className='w-[300px] min-h-[100vh] fixed bg-default-red flex flex-col justify-around items-center'>
-      <div className="">KeepInMind</div>
+      <div className="flex text-white w-[70%] mx-auto items-center text-[1.8rem] pt-[2rem]">
+        <FontAwesomeIcon className='mr-2' icon={faBrain}/>
+        <h2>KeepInMind</h2>
+      </div>
       <div className="flex flex-col text-white justify-center flex-1 w-[70%] mx-auto"> 
-        <ul className='flex flex-col text-[1.5rem] mt-12 justify-around'>
+        <ul className='flex flex-col text-[1.4rem] min-h-[4vh]  justify-around'>
           {navItems.map((item:string,index:number) => <NavItem title={item} key={index} />)}
         </ul>
       </div>

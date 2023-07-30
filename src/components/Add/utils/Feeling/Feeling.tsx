@@ -1,7 +1,7 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext } from 'react'
-import { BookContext } from '../../../../../context/BookContext'
+import { MovieContext } from '../../../../context/MovieContext'
 
 interface Props{
     feeling:{
@@ -11,10 +11,11 @@ interface Props{
     },
     disable?:boolean,
     trash?:boolean,
+    feelingsValue:any,
+    setFeelingsValue:any
 }
 
-const Feeling:React.FC<Props> = ({feeling,disable,trash}) => {
-  const {feelingsValue,setFeelingsValue} = useContext(BookContext);
+const Feeling:React.FC<Props> = ({feeling,disable,trash,feelingsValue,setFeelingsValue}) => {
 
   const setFeelingHandler = ():void => {
     let valueRight = true;
