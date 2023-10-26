@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer:React.FC = () => {
   return (
     <div className='w-full min-h-[10vh]  flex justify-center items-center'>
        &copy; 2023 Morosanu Iustin 

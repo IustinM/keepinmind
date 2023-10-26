@@ -1,28 +1,43 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBrain, faGear} from '@fortawesome/free-solid-svg-icons'
+import { faBrain, faGear, faUser} from '@fortawesome/free-solid-svg-icons'
 import NavItem from './utils/NavItem';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
+import { SetStateAction, useContext, useState } from 'react';
+import Links from './utils/Links';
+import UserNav from './utils/UserNav';
+import Burger from './utils/Burger';
+import { AnimatePresence, motion } from 'framer-motion';
+import { hiddenTranslateVariant } from '../utils/variants';
 
 const Navigation:React.FC = () => {
 
-  const navItems = ['Books','Movies','Days'];
+ 
+  const {username} = useContext(UserContext);
+  const [hideBurgerNav,setHideBurgerNav] = useState<boolean>(false);
 
+  
   return (
-    <div className='w-[300px] min-h-[100vh] fixed bg-default-red flex flex-col justify-around items-center'>
-      <div className="flex text-white w-[70%] mx-auto items-center text-[1.8rem] pt-[2rem]">
+    <div className='w-[300px] min-h-[100vh] lg:min-h-[10vh] z-[150] lg:flex-row lg:w-full fixed lg:relative bg-default-red flex flex-col items-center'>
+      <div className="flex text-white w-[70%] mx-auto items-center text-[1.8rem] lg:pt-0 pt-[2rem]">
         <FontAwesomeIcon className='mr-2' icon={faBrain}/>
         <h2>KeepInMind</h2>
       </div>
-      <div className="flex flex-col text-white justify-center flex-1 w-[70%] mx-auto"> 
-        <ul className='flex flex-col text-[1.4rem] min-h-[4vh]  justify-around'>
-          {navItems.map((item:string,index:number) => <NavItem title={item} key={index} />)}
-        </ul>
+      <Burger hideBurgerNav={hideBurgerNav} setHideBurgerNav={setHideBurgerNav}/>
+      <div className="lg:absolute flex flex-col justify-around min-h-[90vh]  lg:hidden lg:bottom-0 lg:translate-y-[100%] lg:bg-default-red lg:w-full lg:flex-col lg:justify-center lg:items-center">
+        <Links/>
+        <UserNav username={username}/>
       </div>
-      <div className="flex-1 flex items-end pb-10 w-[70%] mx-auto">
-        <div className="w-[100px] h-[50px] bg-white relative rounded-[0.5rem] cursor-pointer">
-          <FontAwesomeIcon className='w-[23px] text-default-red h-[23px] absolute top-[60%] translate-y-[-50%] left-[50%]' icon={faGear}/>
-          <FontAwesomeIcon className='w-[23px] text-default-red h-[23px] absolute top-[40%] translate-y-[-50%] left-[28%]' icon={faGear}/>
-        </div>
-      </div>
+      
+      <AnimatePresence>
+        {
+          !hideBurgerNav &&
+          <motion.div variants={hiddenTranslateVariant(100)} animate={'show'} initial='hidden' exit='exit'  className="lg:absolute lg:bottom-0 lg:translate-y-[100%] lg:bg-default-red lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center">
+          <Links/>
+          <UserNav username={username}/>
+        </motion.div>
+        }
+      </AnimatePresence>
     </div>
   )
 }

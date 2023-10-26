@@ -25,7 +25,7 @@ const AddText:React.FC<Props> = ({labelText,inputId,localValues,setLocalValues})
     }
     
     return (
-        <div className="flex w-[400px]">
+        <div className="flex ">
 
             <div className="flex-1">
                 <Input inputValue={localInputValue} setInputValue={setLocalInputValue} labelText={labelText}  inputId={inputId} specialStyle />

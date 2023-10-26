@@ -5,6 +5,7 @@ import { PageContext } from '../context/PageContainer'
 import AddModal from '../components/Add/utils/AddModal'
 import { BookContext } from '../context/BookContext'
 import DataElements from '../components/Add/DataElements'
+import { AnimatePresence } from 'framer-motion'
 
 
 const BookPage:React.FC = () => {
@@ -16,15 +17,17 @@ const BookPage:React.FC = () => {
     setCurrentNavItem('books')
   },[])
   return (
-    <div className="flex">
+    <div className="flex lg:flex-col">
     <Navigation/>
     <div className="min-w-[300px] max-w-[300px]"></div>
     <div className=' w-full'>
         <MenuContainer/>
+        <AnimatePresence>
         {hideAddModal ? 
         <AddModal title='book' elementsValue={booksValue} setElementsValue={setBooksValue}  authorInput />
         :
         <DataElements title='Books' elementsValue={booksValue} setElementsValue={setBooksValue} feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>}
+        </AnimatePresence>
     </div>
   </div>
   )

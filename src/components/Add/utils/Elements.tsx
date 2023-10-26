@@ -47,7 +47,7 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
             </> :
             <>
             <div className="absolute bg-white top-[1rem] right-[1rem] px-[1.2rem] text-black rounded-[0.5rem] py-[0.7rem]">
-                {element.feelings[0].type}
+                { element.feelings[0].type}
             </div>
             <div className="mb-[1rem] ">
                 <h2 className='text-[1.4rem]'>{element.title}</h2>

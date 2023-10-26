@@ -1,12 +1,29 @@
 import { faBook, faBookAtlas, faCalendarDay, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageNavigation from '../components/Navigation/PageNavigation'
 import Footer from '../components/utils/Footer'
 
 const Homepage = () => {
     const [indexScale,setIndexScale] = useState<number>(0);
+
+    // useEffect(()=>{
+    
+    //    const interval =  setInterval(()=> {
+    //        console.log(indexScale)
+    //        if(indexScale === 3){
+    //            setIndexScale(1);
+    //            console.log('here');
+    //         }else{
+    //             setIndexScale(index => index + 1);
+    //             console.log('here2')
+    //          }
+
+    //    }
+    //   ,2000)   
+    //  return () => clearInterval(interval);     
+    // },[]);
 
   return (
     <div className='min-h-[100vh]'>

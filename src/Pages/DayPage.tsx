@@ -17,7 +17,7 @@ const DayPage:React.FC = () => {
   },[])
 
   return (
-    <div className="flex">
+    <div className="flex lg:flex-col">
     <Navigation/>
     <div className="min-w-[300px] max-w-[300px]"></div>
     <div className=' w-full'>

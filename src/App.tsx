@@ -11,6 +11,7 @@ import MovieProvider from './context/MovieContext';
 import PageProvider from './context/PageContainer';
 import UserProvider from './context/userContext';
 import Homepage from './Pages/Homepage';
+import Userpage from './User/UserPage/Userpage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <PageProvider>
           <Routes>
             <Route path='/' element={<Homepage/>}/>
+            <Route path='/user' element={<Userpage/>}/>
             <Route path='/movies' element={<MoviePage/>}/>
             <Route path='/books' element={<BookPage/>}/>
             <Route path='/days' element={<DayPage/> }/>

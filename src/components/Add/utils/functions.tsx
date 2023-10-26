@@ -1,3 +1,9 @@
+import { SetStateAction, useState } from "react";
+import Textarea from "../../Navigation/utils/Textarea";
+import Input from "../../utils/Input";
+import Select from "../../utils/Select";
+import TextItem from "./TextItem";
+
 export const gradientGenerator = (element:any) => {
     switch(element.feelings[0].type.toLowerCase()){
         case 'sadness':
@@ -13,4 +19,22 @@ export const gradientGenerator = (element:any) => {
         default :
             return 'linear-gradient(157deg, rgba(255,0,0,1) 16%, rgba(255,175,0,1) 100%)';
         }
+}
+
+export const returnInputTypeHandler = (type:string,title:string,inputValue:any,setInputValue:React.Dispatch<React.SetStateAction<any>>,inputId:string):JSX.Element =>{
+
+    switch(type.toLowerCase()){
+        case 'input':{
+            return <Input labelText={title} inputId={inputId} inputValue={inputValue} setInputValue={setInputValue}/>
+        };
+        case "textarea" :{
+            return <Textarea inputValue={inputValue} setInputValue={setInputValue} labelText={title} inputId={`description_${title}`}/>
+        }
+        case "category-input":{
+            return inputValue.map((item:any) =><TextItem item={item} localValues={inputValue} setLocalValues={setInputValue} /> )
+        }
+        default:{
+            return <Input labelText={title} inputId={inputId} inputValue={inputValue} setInputValue={setInputValue}/>
+        }
+    }
 }

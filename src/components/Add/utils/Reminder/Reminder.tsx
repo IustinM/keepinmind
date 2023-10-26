@@ -21,13 +21,13 @@ const Reminder = () => {
             <Input labelText={'Email Address'} inputId={'email_address'} inputValue={emailAddress} setInputValue={setEmailAddress} />
         </div>
             <div className="flex">
-                <div className="w-[65%]">
+                {/* <div className="w-[65%]">
                     <Select data={days} label="Day"/>
                 </div>
                 <div className="mx-1"></div>
                 <div className="w-[35%]">
                     <Select data={hours} label="Hour"/>
-                </div>
+                </div> */}
             </div>
         </div>
         }
