@@ -5,6 +5,8 @@ import { PageContext } from '../context/PageContainer'
 import AddModal from '../components/Add/utils/AddModal'
 import {DayContext} from '../context/DayContext'
 import DataElements from '../components/Add/DataElements'
+import { regenerateTokenAsync } from '../components/Add/utils/functions'
+import axios from 'axios'
 
 
 const DayPage:React.FC = () => {
@@ -12,7 +14,21 @@ const DayPage:React.FC = () => {
   const {hideAddModal,setCurrentNavItem} = useContext(PageContext);
   const {daysValues,setDaysValues,feelingsValue,setFeelingsValue} = useContext(DayContext);
 
+  const getDaysValue = async(retry=true) =>{
+
+    try{
+      const daysValueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/days`,{
+        withCredentials:true
+      })
+      setDaysValues(daysValueAsync.data)
+    }catch(err:any){
+      regenerateTokenAsync(err,getDaysValue,retry);
+    }
+  }
+  
+
   useEffect(()=>{
+    getDaysValue();
     setCurrentNavItem('days')
   },[])
 
@@ -25,7 +41,7 @@ const DayPage:React.FC = () => {
         {hideAddModal ? 
         <AddModal title='day' elementsValue={daysValues} setElementsValue={setDaysValues} />
         :
-        <DataElements title={'Days'} elementsValue={daysValues} setElementsValue={setDaysValues} feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>}
+        <DataElements title={'Days'}  type={'days'} elementsValue={daysValues} setElementsValue={setDaysValues} feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>}
     </div>
   </div>
   )

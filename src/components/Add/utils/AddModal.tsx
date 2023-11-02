@@ -15,8 +15,9 @@ import { v4 as uuid } from 'uuid';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 // import EditColumn from './EditColumn/EditColumn';
-import { returnInputTypeHandler } from './functions';
+import { regenerateTokenAsync, returnInputTypeHandler } from './functions';
 import axios from 'axios';
+import {BookContext} from '../../../context/BookContext';
 
 interface Props{
     title:string,
@@ -26,9 +27,10 @@ interface Props{
 }
 
 const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorInput}) => {
-   
+   console.log(title)
     // context state values -->
-    const {setViewMenu,setHideAddModal,editMode,setEditMode,currentEditElement,newColumns,setNewColumns, newColumnsValues, setNewColumnsValues,} = useContext(PageContext);
+    const {setViewMenu,setHideAddModal,editMode,setEditMode,setB,currentEditElement,newColumns,setNewColumns, newColumnsValues, setNewColumnsValues} = useContext(PageContext);
+    
     //<-- context state values 
 
     //local state values -->
@@ -41,57 +43,99 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
     const [disableAddButton,setDisableAddButton] = useState<boolean>(false);
     const [feelingsValue,setFeelingsValue] = useState<any>([]);
     //<-- local state values
+    const emptyStateValues = ():void=>{
+        setElementTitle('');
+        setElementDescription('');
+        setTitleAuthor('');
+        setEnjoysValues([]);
+        setDislikesValues([]);
+        setLearnedValues([]);
+        setFeelingsValue([]);
+    }
 
     //this handlers add a new movie,day and book or edits them
-    const addEditElementHandler = async() => {
+    const addEditElementHandler = async(retry=true) => {
+        console.log(title)
+        const reloadData = async () =>{
+            console.log('here_reload')
+            try{
+                const valueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/${title}s/`,{
+                  withCredentials:true
+                })
+                console.log('edit here')
+                console.log(valueAsync)
+                setElementsValue(valueAsync.data);
+                setEditMode(false);
+                setHideAddModal(false)
+              }catch(err:any){
+                regenerateTokenAsync(err,addEditElementHandler,retry);
+              }
+        }
+        if(!editMode){
         try{
-            
-        
-        axios.post(`${process.env.REACT_APP_API_URL}/books/post-book`,{
-            data:{
-                title:elementTitle,
-                author:titleAuthor,
-                description:elementDescription,
-                enjoys:JSON.stringify(enjoysValues),
-                dislikes:JSON.stringify(dislikesValues),
-                learns:JSON.stringify(learnedValues),
-                feelings:JSON.stringify(feelingsValue),
-                id:uuid()
+            const postValues = await axios.post(`${process.env.REACT_APP_API_URL}/${title}s/`,title === 'book' ? {
+                    data:{
+                        title:elementTitle,
+                        author:titleAuthor,
+                        description:elementDescription,
+                        enjoys:JSON.stringify(enjoysValues),
+                        dislikes:JSON.stringify(dislikesValues),
+                        learns:JSON.stringify(learnedValues),
+                        feelings:JSON.stringify(feelingsValue),
+                        id:uuid(),
+                    } ,
+                    
+            } : {
+                data:{
+                    title:elementTitle,
+                    description:elementDescription,
+                    enjoys:JSON.stringify(enjoysValues),
+                    dislikes:JSON.stringify(dislikesValues),
+                    learns:JSON.stringify(learnedValues),
+                    feelings:JSON.stringify(feelingsValue),
+                    id:uuid()
+                } , 
+            },{
+                withCredentials:true
+            }) 
+           
+                reloadData();
+      
+    }catch(err:any){
+        console.log('here')
+        console.log(err)
+        regenerateTokenAsync(err,addEditElementHandler,retry)
+    }
+    }else{
+        try{
+            const editElement = await axios.put(`${process.env.REACT_APP_API_URL}/${title}s`,title === 'book' ? {
+                data:{
+                    title:elementTitle,
+                    author:titleAuthor,
+                    description:elementDescription,
+                    enjoys:JSON.stringify(enjoysValues),
+                    dislikes:JSON.stringify(dislikesValues),
+                    learns:JSON.stringify(learnedValues),
+                    feelings:JSON.stringify(feelingsValue),
+                    id:currentEditElement.id
+                }
+            } :{
+                data:{
+                    title:elementTitle,
+                    description:elementDescription,
+                    enjoys:JSON.stringify(enjoysValues),
+                    dislikes:JSON.stringify(dislikesValues),
+                    learns:JSON.stringify(learnedValues),
+                    feelings:JSON.stringify(feelingsValue),
+                    id:currentEditElement.id
+                }
+            },{withCredentials:true})
+            if(editElement){
+                reloadData();
             }
-        }).then(result =>{
-            console.log(result)
-        })
-        // if(!editMode){
-        //     setElementsValue([
-        //         ...elementsValue,{
-        //             title:elementTitle,
-        //             author:titleAuthor,
-        //             description:elementDescription,
-        //             enjoys:enjoysValues,
-        //             dislikes:dislikesValues,
-        //             learns:learnedValues,
-        //             feelings:feelingsValue,
-        //             id:uuid(),
-        //         }
-        //     ]);
-        // }else{
-        //         const items = [...elementsValue];
-        //         const indexOfElement = items.findIndex(element => element.id === currentEditElement.id);
-        //         items[indexOfElement]= {title:elementTitle,
-        //             author:titleAuthor,
-        //             description:elementDescription,
-        //             enjoys:enjoysValues,
-        //             dislikes:dislikesValues,
-        //             learns:learnedValues,
-        //             feelings:feelingsValue,
-        //             id:currentEditElement.id
-        //         };
-        //         setElementsValue([...items]);
-        // }
-        // setEditMode(false);
-        // setHideAddModal(false);
-    }catch(err){
-        console.log(err);
+        }catch(err:any){
+            regenerateTokenAsync(err,addEditElementHandler,retry)
+        }
     }
     }
 
@@ -120,10 +164,10 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
             setElementTitle(currentEditElement.title);
             setElementDescription(currentEditElement.description);
             setTitleAuthor(currentEditElement.author);
-            setEnjoysValues([...currentEditElement.enjoys]);
-            setDislikesValues([...currentEditElement.dislikes]);
-            setLearnedValues([...currentEditElement.learns]);
-            setFeelingsValue([...currentEditElement.feelings])
+            setEnjoysValues([...JSON.parse(currentEditElement.enjoys)]);
+            setDislikesValues([...JSON.parse(currentEditElement.dislikes)]);
+            setLearnedValues([...JSON.parse(currentEditElement.learns)]);
+            setFeelingsValue([...JSON.parse(currentEditElement.feelings)])
         }
     },[]);
 
@@ -145,9 +189,6 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
         }
     },[elementTitle,elementDescription,titleAuthor,enjoysValues,dislikesValues,feelingsValue,learnedValues])
     
-    const changeColumnValue = () =>{
-
-    }
     useEffect(() =>{
         setViewMenu(false);
     },[]);
@@ -230,7 +271,7 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
                 </div>
             </div>
             <div className=" flex justify-center mt-[2rem] mb-[1rem] ">
-                <button onClick={addEditElementHandler} disabled={disableAddButton} className={`w-[200px] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-[#d6305799]'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
+                <button onClick={() => addEditElementHandler()} disabled={disableAddButton} className={`w-[200px] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-[#d6305799]'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
                   {editMode ? `Edit ${title}`:  `Add ${title}`}
                 </button>
             </div>

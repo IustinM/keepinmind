@@ -6,6 +6,8 @@ import AddModal from '../components/Add/utils/AddModal'
 import { BookContext } from '../context/BookContext'
 import DataElements from '../components/Add/DataElements'
 import { AnimatePresence } from 'framer-motion'
+import axios from 'axios'
+import { regenerateTokenAsync } from '../components/Add/utils/functions'
 
 
 const BookPage:React.FC = () => {
@@ -13,7 +15,21 @@ const BookPage:React.FC = () => {
   const {hideAddModal,setCurrentNavItem} = useContext(PageContext);
   const {booksValue,setBooksValue,feelingsValue,setFeelingsValue} = useContext(BookContext);
 
+  const getBooksValue = async(retry=true) =>{
+
+    try{
+      const booksValueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/books`,{
+        withCredentials:true
+      })
+      setBooksValue(booksValueAsync.data)
+    }catch(err:any){
+      regenerateTokenAsync(err,getBooksValue,retry);
+    }
+  }
+  
+
   useEffect(()=>{
+    getBooksValue();
     setCurrentNavItem('books')
   },[])
   return (
@@ -26,7 +42,7 @@ const BookPage:React.FC = () => {
         {hideAddModal ? 
         <AddModal title='book' elementsValue={booksValue} setElementsValue={setBooksValue}  authorInput />
         :
-        <DataElements title='Books' elementsValue={booksValue} setElementsValue={setBooksValue} feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>}
+        <DataElements title='Books' type='books' elementsValue={booksValue} setElementsValue={setBooksValue} feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>}
         </AnimatePresence>
     </div>
   </div>

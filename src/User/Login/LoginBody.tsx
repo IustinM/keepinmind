@@ -15,7 +15,6 @@ const LoginBody:React.FC = () => {
     
     const submitLogin = (e:React.SyntheticEvent):void => {
         e.preventDefault();
-        console.log(email,password)
         try{
             axios.post(`${process.env.REACT_APP_API_URL}/login`,{
                 email:email,

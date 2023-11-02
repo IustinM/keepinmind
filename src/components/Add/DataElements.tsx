@@ -9,9 +9,10 @@ interface Props{
   setElementsValue:any,
   feelingsValue:any,
   setFeelingsValue:any,
+  type:string,
 }
 
-const DataElements:React.FC<Props> = ({title,elementsValue,setElementsValue,feelingsValue,setFeelingsValue}) => {
+const DataElements:React.FC<Props> = ({title,elementsValue,setElementsValue,feelingsValue,setFeelingsValue,type}) => {
 
   const {sorted} = useContext(PageContext);
   
@@ -23,11 +24,11 @@ const DataElements:React.FC<Props> = ({title,elementsValue,setElementsValue,feel
           elementsValue.length > 0 ?
           sorted && elementsValue.length > 0 ? 
           [...elementsValue].sort((a:any, b:any) => a.title.localeCompare(b.title)).map((book:any,index:number)=>
-            <Elements key={index} element={book} feelingsValue={feelingsValue}  elementsValue={elementsValue} setElementsValue = {setElementsValue} setFeelingsValue={setFeelingsValue}/>
+            <Elements key={index} element={book} type={type} feelingsValue={feelingsValue}  elementsValue={elementsValue} setElementsValue = {setElementsValue} setFeelingsValue={setFeelingsValue}/>
           )
           :
           elementsValue.map((book:any,index:number)=>
-            <Elements key={index} element={book} feelingsValue={feelingsValue}  elementsValue={elementsValue} setElementsValue = {setElementsValue} setFeelingsValue={setFeelingsValue}/>
+            <Elements key={index} type={type} element={book} feelingsValue={feelingsValue}  elementsValue={elementsValue} setElementsValue = {setElementsValue} setFeelingsValue={setFeelingsValue}/>
           )
           :
           <NoData name={title.toLowerCase()}/>

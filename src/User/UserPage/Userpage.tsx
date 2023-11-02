@@ -5,7 +5,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../components/utils/Footer'
 import Input from '../../components/utils/Input'
-import { UserContext } from '../../context/userContext'
+import { UserContext } from '../../context/userContext';
+import { regenerateTokenAsync } from '../../components/Add/utils/functions'
 
 const Userpage = () => {
     const navigate = useNavigate();
@@ -20,28 +21,13 @@ const Userpage = () => {
         setEditMode(false);
     }
     const getUserProfile = async (retry = true) => {
-
-        console.log(retry)
         try {
             const result = await axios.post(`${process.env.REACT_APP_API_URL}/get-profile`, {}, {
                 withCredentials: true
             });
+           
         } catch (err:any) {
-            
-            if (err.response && err.response.status === 400 && err.response.data === "Token has expired" && retry) {
-                
-                try {
-                    const tokenResult = await axios.post(`${process.env.REACT_APP_API_URL}/regenerate-token`, {}, {
-                        withCredentials: true
-                    });
-                    getUserProfile(false);
-                    
-                } catch (tokenError) {
-                    console.log( tokenError);
-                }
-            } else {
-                console.log(err);
-            }
+            regenerateTokenAsync(err,getUserProfile,retry)
         }
     }
 
@@ -119,3 +105,7 @@ const Userpage = () => {
 }
 
 export default Userpage
+
+function regenerateToken() {
+    throw new Error('Function not implemented.')
+}

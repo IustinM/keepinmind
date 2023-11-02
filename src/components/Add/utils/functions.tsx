@@ -1,3 +1,4 @@
+import axios from "axios";
 import { SetStateAction, useState } from "react";
 import Textarea from "../../Navigation/utils/Textarea";
 import Input from "../../utils/Input";
@@ -5,7 +6,8 @@ import Select from "../../utils/Select";
 import TextItem from "./TextItem";
 
 export const gradientGenerator = (element:any) => {
-    switch(element.feelings[0].type.toLowerCase()){
+    const feelings = JSON.parse(element.feelings)
+    switch(feelings[0].type.toLowerCase()){
         case 'sadness':
             return 'linear-gradient(157deg, rgba(9,9,121,1) 31%, rgba(0,142,255,1) 100%)';
         case 'happiness':
@@ -37,4 +39,19 @@ export const returnInputTypeHandler = (type:string,title:string,inputValue:any,s
             return <Input labelText={title} inputId={inputId} inputValue={inputValue} setInputValue={setInputValue}/>
         }
     }
+}
+export const regenerateTokenAsync = async (err:any,callback:any,retry:boolean) =>{
+  
+    if (err.response && err.response.status === 401  && retry) {
+        try {
+            const tokenResult = await axios.post(`${process.env.REACT_APP_API_URL}/regenerate-token`, {}, {
+                withCredentials: true
+            });
+            console.log('tokenResult:',tokenResult)
+            callback(false);
+            
+        } catch (tokenError) {
+            console.log( tokenError);
+        }
+    } 
 }
