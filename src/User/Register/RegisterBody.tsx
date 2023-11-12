@@ -2,15 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/UserContext';
 import Input from '../../components/utils/Input';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import LoadingCircle from '../../components/utils/LoadingCircle';
 import FormError from '../../components/utils/FormError';
 import { isValidEmail } from '../../components/utils/utilFunctions';
 import FormButton from '../Utils/FormButton';
-
 
 const RegisterBody:React.FC = () => {
 
@@ -63,6 +58,7 @@ const RegisterBody:React.FC = () => {
             setError('Please enter an valid email')
         }
     };
+
     useEffect(() => {
         if(username.length > 0 && emailRegister.length > 0 && passwordRegister.length > 0 && confirmPassword.length > 0){
             setDisableButton(false);
@@ -96,13 +92,10 @@ const RegisterBody:React.FC = () => {
             <Input inputId='coPasswordRegister' labelText={'Please confirm your password'} password setInputValue={setConfirmPassword} inputValue={confirmPassword}/>
             <div className="flex flex-col w-[80%] mt-3 mx-auto mb-[1rem] items-end text-right  text-[0.9rem]">
                 <p className="underline cursor-pointer">Forgot password? </p>
-
             </div>
-           
             <div className="flex justify-center w-[80%] mx-auto mt-[1rem]">
                <FormButton text='Submit' disableButton={disableButton} isLoading={isLoading}/>
             </div>
-            
         </form>
     </div>
   )

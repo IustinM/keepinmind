@@ -3,7 +3,7 @@ import NavItem from './NavItem'
 
 
 
-const Links = () => {
+const Links:React.FC = () => {
   const navItems = ['Books','Movies','Days'];
 
   return (

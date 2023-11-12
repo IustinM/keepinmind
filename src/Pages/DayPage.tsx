@@ -7,10 +7,12 @@ import {DayContext} from '../context/DayContext'
 import DataElements from '../components/Add/DataElements'
 import { regenerateTokenAsync } from '../components/Add/utils/functions'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const DayPage:React.FC = () => {
 
+  const navigate = useNavigate();  
   const {hideAddModal,setCurrentNavItem} = useContext(PageContext);
   const {daysValues,setDaysValues,feelingsValue,setFeelingsValue} = useContext(DayContext);
 
@@ -22,7 +24,7 @@ const DayPage:React.FC = () => {
       })
       setDaysValues(daysValueAsync.data)
     }catch(err:any){
-      regenerateTokenAsync(err,getDaysValue,retry);
+      regenerateTokenAsync(err,getDaysValue,retry,navigate);
     }
   }
   

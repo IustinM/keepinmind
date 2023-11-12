@@ -1,23 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PageNavigation from '../../components/Navigation/PageNavigation';
 import Footer from '../../components/utils/Footer';
-import Loading from '../../Pages/Loading';
 import LoginBody from './LoginBody';
 import { useNavigate } from 'react-router-dom';
 
 const Login:React.FC = () => {
-    const navigate = useNavigate();
-//     useEffect(()=>{
-//         const userInfo = localStorage.getItem('userInfo');
-//         if (userInfo) {
-//           const parsedUserInfo = JSON.parse(userInfo);
-//           if (parsedUserInfo === 'logged') {
-//             navigate('/books')
-//           }
-//         }
-//         console.log('here')
-// },[]);
+   
   return (
     <div className="">
         <div className="flex items-center md:flex-col mx-auto w-[85%] min-h-[10vh] justify-between">

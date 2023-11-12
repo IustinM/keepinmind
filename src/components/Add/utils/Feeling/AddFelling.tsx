@@ -5,11 +5,7 @@ import { v4 as uuid } from 'uuid';
 import { MovieContext } from '../../../../context/MovieContext';
 import { colors, } from './data';
 
-interface Props{
-   
-}
-
-const AddFelling:React.FC<Props> =memo(({}) => {
+const AddFelling:React.FC =memo(({}) => {
 
     //context
     const {feelingsValue,setFeelingsValue} = useContext(MovieContext);

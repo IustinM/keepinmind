@@ -18,11 +18,11 @@ const Menu = () => {
                 <span className='px-3'>Sort items</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faSort}/>
             </div>
-            <div onClick={()=> setEditMode(!editMode)} className=" border-b-[1px] cursor-pointer flex justify-between transition-all hover:bg-[#ffffffc8]  hover:text-[#0000004f] border-[#ffffff50] py-3">
+            <div onClick={()=> {setEditMode(!editMode);setHideAddModal(false)}} className=" border-b-[1px] cursor-pointer flex justify-between transition-all hover:bg-[#ffffffc8]  hover:text-[#0000004f] border-[#ffffff50] py-3">
                 <span className='px-3'>Edit page</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faPen}/>
             </div>
-            <div onClick={()=> setHideAddModal(true)} className="py-3 cursor-pointer flex justify-between hover:bg-[#ffffffc8]  transition-all rounded-b-[0.5rem] hover:text-[#0000004f]">
+            <div onClick={()=>{ setHideAddModal(true); setEditMode(false)}} className="py-3 cursor-pointer flex justify-between hover:bg-[#ffffffc8]  transition-all rounded-b-[0.5rem] hover:text-[#0000004f]">
                 <span className='px-3'>Add item</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faPlus}/>
             </div>

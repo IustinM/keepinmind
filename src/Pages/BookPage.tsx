@@ -8,33 +8,30 @@ import DataElements from '../components/Add/DataElements'
 import { AnimatePresence } from 'framer-motion'
 import axios from 'axios'
 import { regenerateTokenAsync } from '../components/Add/utils/functions'
-
+import { useNavigate } from 'react-router-dom'
 
 const BookPage:React.FC = () => {
 
   const {hideAddModal,setCurrentNavItem,loadingApp,setLoadingApp} = useContext(PageContext);
   const {booksValue,setBooksValue,feelingsValue,setFeelingsValue} = useContext(BookContext);
-  
+  const navigate = useNavigate();  
 
   const getBooksValue = async(retry=true) =>{
-
     try{
       const booksValueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/books`,{
         withCredentials:true
       })
       setBooksValue(booksValueAsync.data)
     }catch(err:any){
-      regenerateTokenAsync(err,getBooksValue,retry);
+      regenerateTokenAsync(err,getBooksValue,retry,navigate);
     }
   }
   
   useEffect(()=>{
     getBooksValue();
     setCurrentNavItem('books')
-    // setTimeout(() => {
-    //   setLoadingApp(false);
-    // },3000)
-  },[])
+  },[]);
+  
   return (
     <div className="flex lg:flex-col">
       {loadingApp && setLoadingApp}

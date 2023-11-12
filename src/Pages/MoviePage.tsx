@@ -7,9 +7,11 @@ import {MovieContext} from '../context/MovieContext';
 import DataElements from '../components/Add/DataElements';
 import axios from 'axios';
 import { regenerateTokenAsync } from '../components/Add/utils/functions';
+import { useNavigate } from 'react-router-dom';
 
 const MoviePage:React.FC = () => {
 
+  const navigate = useNavigate();  
   const {hideAddModal,setCurrentNavItem} = useContext(PageContext);
   const {moviesValues,setMoviesValues,feelingsValue,setFeelingsValue} = useContext(MovieContext);
 
@@ -21,7 +23,7 @@ const MoviePage:React.FC = () => {
       })
       setMoviesValues(moviesValueAsync.data)
     }catch(err:any){
-      regenerateTokenAsync(err,getDaysValue,retry);
+      regenerateTokenAsync(err,getDaysValue,retry,navigate);
     }
   }
   

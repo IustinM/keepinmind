@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../context/UserContext';
+import React, { useEffect, useState } from 'react'
 import Input from '../../components/utils/Input';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import FormButton from '../Utils/FormButton';
 import { isValidEmail } from '../../components/utils/utilFunctions';
 import FormError from '../../components/utils/FormError';
-import { PageContext } from '../../context/PageContainer';
-
 
 
 const ForgotPasswordBody:React.FC = () => {
 
     const navigate = useNavigate();
+    
+    //local state -->
     const [email,setEmailLogin]= useState<string>('');
     const [password,setPassword] = useState<string>('');
-    const [userExists,setUserExists] = useState<boolean>(false);
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [disableButton,setDisableButton] = useState<boolean>(false)
     const [error,setError] = useState<string>('');
-    const {setUserLogged,userLogged,setEmail,setUsername} = useContext(UserContext);
-    const {setLoadingApp} = useContext(PageContext)
+    //<-- local state 
     
+
     const submitPassword = (e:React.SyntheticEvent):void => {
         e.preventDefault();
         if(isValidEmail(email)){
@@ -37,9 +35,9 @@ const ForgotPasswordBody:React.FC = () => {
                         return
                     }
                     setIsLoading(false);
-
                     navigate('/login');
                     return;
+
                 }).catch((err:any) =>{
                 setIsLoading(false);
                 if(err.response.data ){
@@ -52,8 +50,8 @@ const ForgotPasswordBody:React.FC = () => {
             setError('Please enter an valid email')
         }
     };
+
     useEffect(() => {
-        
         if(email.length <= 0 || password.length <=0){
             setDisableButton(true)
         }else{
@@ -63,7 +61,7 @@ const ForgotPasswordBody:React.FC = () => {
     },[email,password])
 
   return (
-    <div className='w-[330px] h-[400px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
+    <div className='w-[330px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
         <div className="flex justify-center">
             <h2 className="text-[1.4rem] mt-[1rem]">Reset your password</h2>
         </div>

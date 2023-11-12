@@ -1,6 +1,6 @@
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { PageContext } from '../../../context/PageContainer'
 
@@ -9,6 +9,7 @@ interface Props{
     active?:boolean
 }
 const NavItem:React.FC<Props> = ({title,active}) => {
+
   const {currentNavItem,setCurrentNavItem,setHideAddModal,setViewMenu,setEditMode} = useContext(PageContext);
 
   const navElementHandler = () =>{
@@ -17,7 +18,6 @@ const NavItem:React.FC<Props> = ({title,active}) => {
     setViewMenu(false);
     setEditMode(false);
   }
-  console.log(title.toLowerCase(),"navitem:",currentNavItem)
 
   return (
     <Link to={`/${title.toLowerCase()}`}>

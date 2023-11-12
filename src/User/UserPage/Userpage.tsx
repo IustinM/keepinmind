@@ -49,7 +49,7 @@ const Userpage:React.FC = () => {
             setUsername(result.data.username)
            
         } catch (err:any) {
-            regenerateTokenAsync(err,getUserProfile,retry);
+            regenerateTokenAsync(err,getUserProfile,retry,navigate);
             setIsLoading(false);
             if(!retry){
                 setError('Cannot get the user information');
@@ -99,7 +99,7 @@ const Userpage:React.FC = () => {
                 setEditMode(false);        
                 setCancelButton(true);
         } catch (err:any) {
-            regenerateTokenAsync(err,editUserDetails,retry);
+            regenerateTokenAsync(err,editUserDetails,retry,navigate);
             setIsLoading(false);
             if(!retry){
                 setError('Cannot get the user information');

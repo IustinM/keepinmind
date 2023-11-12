@@ -2,7 +2,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { regenerateTokenAsync } from "../components/Add/utils/functions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const UserContext = createContext<any>('');
 
@@ -13,6 +13,7 @@ interface bookValue {
 const UserProvider = ({children}:{children:any}) =>{
     
     // const location = useLocation();
+    const navigate = useNavigate();
     // console.log(location.pathname,':location')
     const [email,setEmail] = useState<string>('');
     const location = useLocation();
@@ -36,7 +37,7 @@ const UserProvider = ({children}:{children:any}) =>{
                 setEmail(result.data.email);
             
             } catch (err:any) {
-                regenerateTokenAsync(err,getUserProfile,retry)
+                regenerateTokenAsync(err,getUserProfile,retry,navigate)
             }
         }
     }

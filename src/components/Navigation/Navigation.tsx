@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBrain, faGear, faUser} from '@fortawesome/free-solid-svg-icons'
-import NavItem from './utils/NavItem';
-import { Link } from 'react-router-dom';
+import { faBrain} from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../context/UserContext';
-import { SetStateAction, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Links from './utils/Links';
 import UserNav from './utils/UserNav';
 import Burger from './utils/Burger';
@@ -11,12 +9,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { hiddenTranslateVariant } from '../utils/variants';
 
 const Navigation:React.FC = () => {
-
  
   const {username} = useContext(UserContext);
   const [hideBurgerNav,setHideBurgerNav] = useState<boolean>(false);
 
-  
   return (
     <div className='w-[300px] min-h-[100vh] lg:min-h-[10vh] z-[150] lg:flex-row lg:w-full fixed lg:relative bg-default-red flex flex-col items-center'>
       <div className="flex text-white w-[70%] mx-auto items-center text-[1.8rem] lg:pt-0 pt-[2rem]">

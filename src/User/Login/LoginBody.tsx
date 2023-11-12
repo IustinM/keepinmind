@@ -8,18 +8,15 @@ import { isValidEmail } from '../../components/utils/utilFunctions';
 import FormError from '../../components/utils/FormError';
 import { PageContext } from '../../context/PageContainer';
 
-
-
 const LoginBody:React.FC = () => {
 
     const navigate = useNavigate();
     const [email,setEmailLogin]= useState<string>('');
     const [password,setPassword] = useState<string>('');
-    const [userExists,setUserExists] = useState<boolean>(false);
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [disableButton,setDisableButton] = useState<boolean>(false)
     const [error,setError] = useState<string>('');
-    const {setUserLogged,userLogged,setEmail,setUsername} = useContext(UserContext);
+    const {setUserLogged,setEmail,setUsername} = useContext(UserContext);
     const {setLoadingApp} = useContext(PageContext)
     
     const submitLogin = (e:React.SyntheticEvent):void => {
@@ -59,11 +56,7 @@ const LoginBody:React.FC = () => {
             setError('Please enter an valid email')
         }
     };
-    useEffect(()=>{
-        if(userLogged){
-            
-        }
-    },[userLogged])
+ 
     useEffect(() => {
         
         if(email.length <= 0 || password.length <=0){

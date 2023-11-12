@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { BookContext } from '../../../context/BookContext';
 import { PageContext } from '../../../context/PageContainer';
 
@@ -22,9 +23,15 @@ interface Props{
 
 const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elementsValue,setElementsValue,type}) => {
 
+    const navigate = useNavigate();
+    //context -->
     const {editMode,setHideAddModal,setCurrentEditElement} = useContext(PageContext)
-    const [expanded,setExpanded] = useState<boolean>(false);
     const {setBooksValue} = useContext(BookContext);
+    //<-- context
+
+    const [expanded,setExpanded] = useState<boolean>(false);
+
+    //delete element handler
     const deleteElementHandler = async (retry = true) =>{
         try{
             const deleteBook = await axios.delete(`${process.env.REACT_APP_API_URL}/${type}/${element.id}`,{
@@ -38,11 +45,11 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
                     setBooksValue(booksValueAsync.data);
                     setHideAddModal(false)
                   }catch(err:any){
-                    regenerateTokenAsync(err,deleteElementHandler,retry);
+                    regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
                   }
             }
         }catch(err){
-            regenerateTokenAsync(err,deleteElementHandler,retry);
+            regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
         }
         const items = [...elementsValue];
         const filterItems = items.filter(item =>{
@@ -52,6 +59,7 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
         setElementsValue([...filterItems]);
     }
    
+    //edit element handler
     const editElementHandler = () =>{
         setHideAddModal(true);
         setCurrentEditElement(element);

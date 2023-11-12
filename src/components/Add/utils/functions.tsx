@@ -40,18 +40,33 @@ export const returnInputTypeHandler = (type:string,title:string,inputValue:any,s
         }
     }
 }
-export const regenerateTokenAsync = async (err:any,callback:any,retry:boolean) =>{
+export const regenerateTokenAsync = async (err:any,callback:any,retry:boolean,navigate:any) =>{
   
     if (err.response && err.response.status === 401  && retry) {
         try {
             const tokenResult = await axios.post(`${process.env.REACT_APP_API_URL}/regenerate-token`, {}, {
                 withCredentials: true
             });
-            console.log('tokenResult:',tokenResult)
             callback(false);
             
-        } catch (tokenError) {
-            console.log( tokenError);
+        } catch (tokenError:any) {
+            if(tokenError.response.data.missingToken){
+                try{
+                    axios.get(`${process.env.REACT_APP_API_URL}/logout`,{
+                        withCredentials:true
+                    }).then(result =>{
+                        if(result.status !== 200){
+                            console.error('Something went wrong');
+                            return;
+                        }
+                        localStorage.removeItem('userInfo');
+                        navigate('/login')
+                    })
+                }catch(err){
+                    console.log(err);
+                }
+            }
+            console.log(tokenError);
         }
     } 
 }

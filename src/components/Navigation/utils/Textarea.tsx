@@ -11,7 +11,8 @@ const Textarea:React.FC<Props> = ({labelText,inputId,inputValue,setInputValue}) 
 
     const [activeInput,setActiveInput] = useState<boolean>(false);
 
-    // handlers
+    // handlers -->
+    //this handler updates the label 
     const setActiveLabelHandler = (e:React.SyntheticEvent) =>{
         const target = e.target as HTMLInputElement;
         setInputValue(target.value);
@@ -21,11 +22,14 @@ const Textarea:React.FC<Props> = ({labelText,inputId,inputValue,setInputValue}) 
             setActiveInput(false);
         }
     }   
+    //this handler disables the active form of the input when is not focused
     const onBlurHandler = () =>{
         if(inputValue.length <= 0){
             setActiveInput(false)
         }
     }
+    //<-- handlers
+    
     useEffect(()=>{
         if(inputValue.length <= 0){
             setActiveInput(false);

@@ -7,9 +7,7 @@ interface Props{
 }
 
 const NoData:React.FC<Props> = ({name}) => {
-  
-  console.log(name);
-  
+
   const returnIcon = () =>{
     switch(name){
       case 'movies':
@@ -20,6 +18,7 @@ const NoData:React.FC<Props> = ({name}) => {
         return <FontAwesomeIcon className='text-default-red  w-[120px] h-[120px]' icon={faCalendarDay}/>
     }
   }
+  
   return (
     <div className='w-[85%] mx-auto h-[70vh] '>
         <p className='text-[1.2rem] mt-2'>You don't have any {name} added for the moment</p>

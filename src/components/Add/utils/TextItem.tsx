@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { inputValueTypes } from '../../utils/types'
+import { variants } from './variants'
 
 
 interface Props{
@@ -13,26 +14,14 @@ interface Props{
 
 const TextItem:React.FC<Props> = ({item,localValues,setLocalValues}) => {
 
+  //local state -->
   const [editMode,setEditMode] = useState<boolean>(true);
   const [isInput,setIsInput] = useState<boolean>(true);
+  //<-- local state 
 
-  const variants = {
-    hidden: { 
-        y:'50%',
-        opacity: 0 
-    },
-    exit: { 
-        y:'10%',
-        opacity: 0 
-    },
-    show: {
-      opacity: 1,
-      y:'0%',
-      
-    }
-  }
   
   //handlers -->
+
   //this handler is edit the text
   const inputEditHandler = (e:React.SyntheticEvent) =>{
       const target = e.target as HTMLInputElement;
@@ -41,6 +30,7 @@ const TextItem:React.FC<Props> = ({item,localValues,setLocalValues}) => {
       items[indexOfElement]= {text:target.value,index:item.index};
       setLocalValues([...items]);
     }
+
     //this handler delete the text
     const deleteTextHandler = () =>{
         const items = [...localValues];
@@ -61,15 +51,18 @@ const TextItem:React.FC<Props> = ({item,localValues,setLocalValues}) => {
     }
    //<-- handlers
    
+   //effects -->
    useEffect(()=>{
-    checkNumberOfWords();
+       checkNumberOfWords();
+       
+    },[item]);
     
-   },[item]);
-   useEffect(() => {
-    if(editMode && item.text.length <= 0){
-        deleteTextHandler();
-    }
-   },[editMode])
+    useEffect(() => {
+        if(editMode && item.text.length <= 0){
+            deleteTextHandler();
+        }
+    },[editMode])
+    //<-- effects
 
   return (
     <AnimatePresence key={item.index} mode='wait' initial={false}>

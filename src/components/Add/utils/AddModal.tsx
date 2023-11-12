@@ -12,8 +12,10 @@ import AddText from './AddText';
 import TextItem from './TextItem';
 import { v4 as uuid } from 'uuid';
 import { motion } from 'framer-motion';
-import { regenerateTokenAsync, returnInputTypeHandler } from './functions';
+import {regenerateTokenAsync  } from './functions';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { variants } from './variants';
 
 interface Props{
     title:string,
@@ -22,12 +24,13 @@ interface Props{
     authorInput?:boolean
 }
 
-const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorInput}) => {
+const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
   
     // context state values -->
-    const {setViewMenu,setHideAddModal,editMode,setEditMode,setB,currentEditElement,newColumns,setNewColumns, newColumnsValues, setNewColumnsValues} = useContext(PageContext);
+    const {setViewMenu,setHideAddModal,editMode,setEditMode,currentEditElement} = useContext(PageContext);
     
     //<-- context state values 
+    const navigate = useNavigate();
 
     //local state values -->
     const [elementTitle,setElementTitle] = useState<string>('')
@@ -39,32 +42,21 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
     const [disableAddButton,setDisableAddButton] = useState<boolean>(false);
     const [feelingsValue,setFeelingsValue] = useState<any>([]);
     //<-- local state values
-    const emptyStateValues = ():void=>{
-        setElementTitle('');
-        setElementDescription('');
-        setTitleAuthor('');
-        setEnjoysValues([]);
-        setDislikesValues([]);
-        setLearnedValues([]);
-        setFeelingsValue([]);
-    }
+
+    // HANDLERS -->
 
     //this handlers add a new movie,day and book or edits them
     const addEditElementHandler = async(retry=true) => {
-        console.log(title)
         const reloadData = async () =>{
-            console.log('here_reload')
             try{
                 const valueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/${title}s/`,{
                   withCredentials:true
-                })
-                console.log('edit here')
-                console.log(valueAsync)
+                });
                 setElementsValue(valueAsync.data);
                 setEditMode(false);
                 setHideAddModal(false)
               }catch(err:any){
-                regenerateTokenAsync(err,addEditElementHandler,retry);
+                regenerateTokenAsync(err,addEditElementHandler,retry,navigate);
               }
         }
         if(!editMode){
@@ -94,13 +86,10 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
             },{
                 withCredentials:true
             }) 
-           
                 reloadData();
       
     }catch(err:any){
-        console.log('here')
-        console.log(err)
-        regenerateTokenAsync(err,addEditElementHandler,retry)
+        regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
     }
     }else{
         try{
@@ -130,30 +119,17 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
                 reloadData();
             }
         }catch(err:any){
-            regenerateTokenAsync(err,addEditElementHandler,retry)
+            regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
         }
     }
     }
 
-    const variants = {
-        hidden: { 
-            y:'50%',
-            opacity: 0 
-        },
-        exit: { 
-            y:'10%',
-            opacity: 0 
-        },
-        show: {
-          opacity: 1,
-          y:'0%',
-          transition: {
-            delayChildren: 0.5
-          }
-        }
-      }
+  
+    //<-- HANDLERS 
+
 
     //EFFECTS -->
+    
     //this efects changes all the local state when edit mode is on
     useEffect(()=>{
         if(editMode){

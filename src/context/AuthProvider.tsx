@@ -1,6 +1,6 @@
-import axios from "axios";
-import { createContext, useEffect } from "react";
-import { regenerateTokenAsync } from "../components/Add/utils/functions";
+
+import { createContext } from "react";
+
 
 export const AuthContext = createContext<any>([]);
 

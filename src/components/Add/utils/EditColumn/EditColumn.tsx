@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../../../context/PageContainer';
-import Textarea from '../../../Navigation/utils/Textarea';
 import Input from '../../../utils/Input';
 import { v4 as uuid } from 'uuid';
 import Select from '../../../utils/Select';
@@ -8,11 +7,13 @@ import Select from '../../../utils/Select';
 
 const EditColumn = () => {
 
-    const {editColumnsMode,newColumns,setNewColumns} = useContext(PageContext);
+    const {newColumns,setNewColumns} = useContext(PageContext);
+    // local state -->
     const [disableAddButton,setDisableAddButton] = useState<boolean>(true)
     const [columnType,setColumnType] = useState<string>('');
     const [columnTitle,setColumnTitle] = useState<string>('')
     const [columnDescription,setColumnDescription] = useState<string>('');
+    //<-- local state 
 
 
     const addColumnHandler = ():void=>{
@@ -29,7 +30,7 @@ const EditColumn = () => {
             setNewColumns([column])
         }
     }
-    console.log(newColumns)
+
 
     useEffect(() =>{
         if(columnTitle.length > 0 && columnDescription.length >0 && columnType.length>0){
@@ -37,7 +38,8 @@ const EditColumn = () => {
         }else{
             setDisableAddButton(true);
         }
-    })
+    },[columnTitle,columnDescription,columnType])
+
   return (
     <div className='w-[400px]'>
         <h1 className='text-[1.2rem] mt-[2rem] mb-[1rem]'>Add or edit current columns</h1>
