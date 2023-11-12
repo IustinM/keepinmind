@@ -49,6 +49,7 @@ module.exports = {
       'editGreenHover':'#14a28dcd',
       'removeRed':'#c61a1a',
       'removeRedHover':'#c61a1ace',
+      'disabledButtonRed':'#d6305799',
       'sky-blue':'#4280dc',
       'movie-purple':'#8b46ec',
       'movie-green':'#2cbd8d'

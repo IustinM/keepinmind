@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Input from '../../utils/Input';
 import Textarea from '../../Navigation/utils/Textarea';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Feeling from './Feeling/Feeling';
 import { feelingList } from './Feeling/data';
 import AddFelling from './Feeling/AddFelling';
@@ -10,14 +10,10 @@ import { PageContext } from '../../../context/PageContainer';
 import { inputValueTypes, itemValue } from '../../utils/types';
 import AddText from './AddText';
 import TextItem from './TextItem';
-import Reminder from './Reminder/Reminder';
 import { v4 as uuid } from 'uuid';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-// import EditColumn from './EditColumn/EditColumn';
 import { regenerateTokenAsync, returnInputTypeHandler } from './functions';
 import axios from 'axios';
-import {BookContext} from '../../../context/BookContext';
 
 interface Props{
     title:string,
@@ -27,7 +23,7 @@ interface Props{
 }
 
 const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorInput}) => {
-   console.log(title)
+  
     // context state values -->
     const {setViewMenu,setHideAddModal,editMode,setEditMode,setB,currentEditElement,newColumns,setNewColumns, newColumnsValues, setNewColumnsValues} = useContext(PageContext);
     
@@ -271,7 +267,7 @@ const AddModal:React.FC<Props> = ({title,elementsValue,setElementsValue,authorIn
                 </div>
             </div>
             <div className=" flex justify-center mt-[2rem] mb-[1rem] ">
-                <button onClick={() => addEditElementHandler()} disabled={disableAddButton} className={`w-[200px] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-[#d6305799]'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
+                <button onClick={() => addEditElementHandler()} disabled={disableAddButton} className={`w-[200px] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-disabledButtonRed'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
                   {editMode ? `Edit ${title}`:  `Add ${title}`}
                 </button>
             </div>

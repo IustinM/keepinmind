@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MenuContainer from '../components/PlusMenu/MenuContainer'
 import Navigation from '../components/Navigation/Navigation'
 import { PageContext } from '../context/PageContainer'
@@ -12,8 +12,9 @@ import { regenerateTokenAsync } from '../components/Add/utils/functions'
 
 const BookPage:React.FC = () => {
 
-  const {hideAddModal,setCurrentNavItem} = useContext(PageContext);
+  const {hideAddModal,setCurrentNavItem,loadingApp,setLoadingApp} = useContext(PageContext);
   const {booksValue,setBooksValue,feelingsValue,setFeelingsValue} = useContext(BookContext);
+  
 
   const getBooksValue = async(retry=true) =>{
 
@@ -27,13 +28,16 @@ const BookPage:React.FC = () => {
     }
   }
   
-
   useEffect(()=>{
     getBooksValue();
     setCurrentNavItem('books')
+    // setTimeout(() => {
+    //   setLoadingApp(false);
+    // },3000)
   },[])
   return (
     <div className="flex lg:flex-col">
+      {loadingApp && setLoadingApp}
     <Navigation/>
     <div className="min-w-[300px] max-w-[300px]"></div>
     <div className=' w-full'>

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 import PageNavigation from '../../components/Navigation/PageNavigation';
 import Footer from '../../components/utils/Footer';
-import Loading from '../../Pages/Loading';
-import LoginBody from './LoginBody';
-import { useNavigate } from 'react-router-dom';
+import ForgotPasswordBody from './ForgotPasswordBody';
 
-const Login:React.FC = () => {
+const ForgotPassword:React.FC = () => {
     const navigate = useNavigate();
 //     useEffect(()=>{
 //         const userInfo = localStorage.getItem('userInfo');
@@ -32,11 +32,11 @@ const Login:React.FC = () => {
             </div>
         </div>
         <div className=' min-h-[80vh] flex justify-center items-center '>
-            <LoginBody/>
+            <ForgotPasswordBody/>
         </div>
         <Footer/>
     </div>
   )
 }
 
-export default Login
+export default ForgotPassword

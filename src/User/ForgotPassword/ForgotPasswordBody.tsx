@@ -10,7 +10,7 @@ import { PageContext } from '../../context/PageContainer';
 
 
 
-const LoginBody:React.FC = () => {
+const ForgotPasswordBody:React.FC = () => {
 
     const navigate = useNavigate();
     const [email,setEmailLogin]= useState<string>('');
@@ -22,14 +22,13 @@ const LoginBody:React.FC = () => {
     const {setUserLogged,userLogged,setEmail,setUsername} = useContext(UserContext);
     const {setLoadingApp} = useContext(PageContext)
     
-    const submitLogin = (e:React.SyntheticEvent):void => {
+    const submitPassword = (e:React.SyntheticEvent):void => {
         e.preventDefault();
         if(isValidEmail(email)){
-         
                 setIsLoading(true);
-                axios.post(`${process.env.REACT_APP_API_URL}/login`,{
+                axios.post(`${process.env.REACT_APP_API_URL}/update-password`,{
                     email:email,
-                    password:password
+                    newPassword:password
                 },{
                     withCredentials:true
                 }).then((result:any) => {
@@ -38,16 +37,10 @@ const LoginBody:React.FC = () => {
                         return
                     }
                     setIsLoading(false);
-                    localStorage.setItem('userInfo',JSON.stringify('logged'));
-                    setUserLogged(true);
-                    setUsername(result.data.username);
-                    setEmail(result.data.email);
-                    setLoadingApp(true);
-                    navigate('/books');
+
+                    navigate('/login');
                     return;
                 }).catch((err:any) =>{
-                    console.log('here2')
-                    console.log(err)
                 setIsLoading(false);
                 if(err.response.data ){
                     setError(err.response.data)
@@ -59,11 +52,6 @@ const LoginBody:React.FC = () => {
             setError('Please enter an valid email')
         }
     };
-    useEffect(()=>{
-        if(userLogged){
-            
-        }
-    },[userLogged])
     useEffect(() => {
         
         if(email.length <= 0 || password.length <=0){
@@ -77,7 +65,7 @@ const LoginBody:React.FC = () => {
   return (
     <div className='w-[330px] h-[400px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
         <div className="flex justify-center">
-            <h2 className="text-[1.4rem] mt-[1rem]">Sign in</h2>
+            <h2 className="text-[1.4rem] mt-[1rem]">Reset your password</h2>
         </div>
         <div className="my-[0.5rem] w-[80%] mx-auto ">
             {error?
@@ -86,13 +74,12 @@ const LoginBody:React.FC = () => {
                 <div className='h-[30px]'></div>
             }
         </div>
-        <form onSubmit={submitLogin} className=" my-[1rem] w-[85%] mx-auto ">
+        <form onSubmit={submitPassword} className=" my-[1rem] w-[85%] mx-auto ">
             <h4 className='mb-[0.3rem]'>Email:</h4>
             <Input inputId='emailLogin' labelText={'Please enter your email'} setInputValue={setEmailLogin} inputValue={email}/>
             <h4 className='mb-[0.3rem] mt-[0.5rem]'>Password:</h4>
-            <Input inputId='passwordLogin' password labelText={'Please enter your password'} setInputValue={setPassword} inputValue={password}/>
+            <Input inputId='passwordLogin' password labelText={'Please enter a new password'} setInputValue={setPassword} inputValue={password}/>
             <div className="flex flex-col w-[85%] mx-auto items-end text-right  text-[0.9rem]">
-            <p className="underline cursor-pointer">Forgot password? </p>
             </div>
             <div className="flex justify-center w-[85%] mx-auto mt-[2rem]">
                 <FormButton text='Submit' disableButton={disableButton} isLoading={isLoading}/> 
@@ -103,4 +90,4 @@ const LoginBody:React.FC = () => {
   )
 }
 
-export default LoginBody
+export default ForgotPasswordBody;

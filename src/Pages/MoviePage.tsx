@@ -28,7 +28,7 @@ const MoviePage:React.FC = () => {
 
   useEffect(()=>{
     getDaysValue();
-    setCurrentNavItem('books')
+    setCurrentNavItem('movies')
   },[])
   return (
     <div className="flex lg:flex-col">

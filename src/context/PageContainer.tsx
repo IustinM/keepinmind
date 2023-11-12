@@ -20,6 +20,7 @@ const PageProvider = ({children}:{children:any}) =>{
     const [viewMenu,setViewMenu] = useState<boolean>(false);
     const [currentNavItem,setCurrentNavItem]= useState<string>('books');
     const [hideAddModal,setHideAddModal] = useState<boolean>(false);
+    const [loadingApp,setLoadingApp] = useState<boolean>(false);
     const [editColumnsMode,setEditColumnsMode] = useState<boolean>(false);
     const [newColumns,setNewColumns] = useState<newColumn[]>([]);
     const [newColumnsValues,setNewColumnsValues] = useState<any>({});
@@ -44,6 +45,8 @@ const PageProvider = ({children}:{children:any}) =>{
             newColumnsValues,
             setNewColumnsValues,
             setEditColumnsMode,
+            setLoadingApp,
+            loadingApp,
             setEditMode,
             sorted,
             setSorted

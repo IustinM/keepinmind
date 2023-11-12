@@ -17,6 +17,7 @@ const NavItem:React.FC<Props> = ({title,active}) => {
     setViewMenu(false);
     setEditMode(false);
   }
+  console.log(title.toLowerCase(),"navitem:",currentNavItem)
 
   return (
     <Link to={`/${title.toLowerCase()}`}>

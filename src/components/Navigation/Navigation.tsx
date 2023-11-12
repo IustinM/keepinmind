@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBrain, faGear, faUser} from '@fortawesome/free-solid-svg-icons'
 import NavItem from './utils/NavItem';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/userContext';
+import { UserContext } from '../../context/UserContext';
 import { SetStateAction, useContext, useState } from 'react';
 import Links from './utils/Links';
 import UserNav from './utils/UserNav';

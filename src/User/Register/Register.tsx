@@ -14,7 +14,7 @@ const Register:React.FC = () => {
             </div>
             <div className="flex md:justify-end md:w-full items-center">
                 <p className='mr-[0.7rem]'>Already have an account?</p>
-                <div className="w-[120px] hover:bg-[#5656561f] transition-all cursor-pointer flex justify-center text-[0.9rem] items-center border-[1px] shadow-md  border-[#8686866e] stransition-all px-[1.2rem] py-[0.6rem] text-[#000000c9] rounded-[0.5rem]">
+                <div className="w-[120px]  hover:bg-[#5656561f] transition-all cursor-pointer flex justify-center text-[0.9rem] items-center border-[1px] shadow-md  border-[#8686866e] stransition-all px-[1.2rem] py-[0.6rem] text-[#000000c9] rounded-[0.5rem]">
                     <Link to='/login'>Sign in</Link>
                 </div>
             </div>
