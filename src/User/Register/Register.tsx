@@ -6,6 +6,7 @@ import RegisterBody from './RegisterBody'
 
 
 const Register:React.FC = () => {
+    
   return (
     <div className="">
         <div className="flex items-center mx-auto md:flex-col w-[85%] min-h-[10vh] justify-between">

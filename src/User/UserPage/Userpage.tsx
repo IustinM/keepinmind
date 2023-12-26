@@ -26,18 +26,6 @@ const Userpage:React.FC = () => {
     //<-- local state 
     
     //HANDLERS AND REQUESTS -->
-
-    const editUsernameHandler = () =>{
-        if(isValidEmail(localEmail)){
-            setUsername(localUsername);
-            setEmail(localEmail);
-            setLocalUsername('');
-            setEditMode(false);
-        }else{
-            setError('No valid email');
-        }
-    }
- 
     // async request that gets the user information
     const getUserProfile = async (retry = true) => {
         setIsLoading(true);
@@ -77,7 +65,6 @@ const Userpage:React.FC = () => {
     }
 
     const editUserDetails = async (retry=true) =>{
-     console.log(retry,'test')
         setIsLoading(true);
         try {
             const result = await axios.post(`${process.env.REACT_APP_API_URL}/update-profile`,{
@@ -89,7 +76,6 @@ const Userpage:React.FC = () => {
             },{
                 withCredentials:true,
             })
-                console.log(result)
                 if(result.data.email){
                     setEmail(result.data.email)
                 }
@@ -113,7 +99,6 @@ const Userpage:React.FC = () => {
     useEffect(()=>{
         setIsLoading(false);
         setError('');
-        console.log(localUsername !== username,isValidEmail(localEmail),editMode)
         if((localUsername !== username ) && isValidEmail(localEmail) && editMode){
             setCancelButton(false);
         }else {
@@ -121,6 +106,7 @@ const Userpage:React.FC = () => {
         }
 
     },[localUsername,username,localEmail]);
+    
     useEffect(()=>{
         getUserProfile();
         setLocalEmail(email);

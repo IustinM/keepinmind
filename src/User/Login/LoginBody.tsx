@@ -34,6 +34,7 @@ const LoginBody:React.FC = () => {
                         console.error('Something went wrong');
                         return
                     }
+                    
                     setIsLoading(false);
                     localStorage.setItem('userInfo',JSON.stringify('logged'));
                     setUserLogged(true);
@@ -42,6 +43,7 @@ const LoginBody:React.FC = () => {
                     setLoadingApp(true);
                     navigate('/books');
                     return;
+
                 }).catch((err:any) =>{
                     console.log('here2')
                     console.log(err)
