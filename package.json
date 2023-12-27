@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://IustinM.github.io/keepinmind-client",
+  "homepage": "https://IustinM.github.io/keepinmind-client",
   
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
