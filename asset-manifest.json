@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/keepinmind-client/static/css/main.e332570d.css",
+    "main.js": "/keepinmind-client/static/js/main.4b8ad103.js",
+    "index.html": "/keepinmind-client/index.html",
+    "main.e332570d.css.map": "/keepinmind-client/static/css/main.e332570d.css.map",
+    "main.4b8ad103.js.map": "/keepinmind-client/static/js/main.4b8ad103.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e332570d.css",
+    "static/js/main.4b8ad103.js"
+  ]
+}
