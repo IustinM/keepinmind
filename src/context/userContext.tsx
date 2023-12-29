@@ -27,7 +27,7 @@ const UserProvider = ({children}:{children:any}) =>{
     const getUserProfile = async (retry = true) => {
        
         console.log(location.pathname)
-        if(location.pathname !== '/forgot-password' && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/'){
+        if(location.pathname !== '/forgot-password' && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/keepinmind/'){
             try {
                 console.log('here')
                 const result = await axios.post(`${process.env.REACT_APP_API_URL}/get-profile`, {}, {
