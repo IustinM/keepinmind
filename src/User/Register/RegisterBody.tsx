@@ -25,6 +25,7 @@ const RegisterBody:React.FC = () => {
     const navigate = useNavigate();
 
     const submitRegister = async (e:React.SyntheticEvent) => {
+        console.log(`${process.env.REACT_APP_API_URL}/register`)
         e.preventDefault();
         if(isValidEmail(emailRegister)){
             try{
