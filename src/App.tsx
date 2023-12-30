@@ -12,15 +12,15 @@ import ForgotPassword from './User/ForgotPassword/ForgotPassword';
 function App() {
 
   return (
-          <Routes>
-            <Route path='/keepinmind' element={<Homepage/>}/>
-            <Route path='/keepinmind/user' element={<ProtectedRoute component={Userpage} />} />
-            <Route path='/keepinmind/movies' element={<ProtectedRoute component={MoviePage} />} />
-            <Route path='/keepinmind/books' element={<ProtectedRoute component={BookPage} />} />
-            <Route path='/keepinmind/days' element={<ProtectedRoute component={DayPage} />} />
-            <Route path='/keepinmind/login' element={<Login/>}/>
-            <Route path='/keepinmind/forgot-password' element={<ForgotPassword/>}/>
-            <Route path='/keepinmind/register' element={<Register/>}/>
+          <Routes >
+            <Route path='/' element={<Homepage/>}/>
+            <Route path='/user' element={<ProtectedRoute component={Userpage} />} />
+            <Route path='/movies' element={<ProtectedRoute component={MoviePage} />} />
+            <Route path='/books' element={<ProtectedRoute component={BookPage} />} />
+            <Route path='/days' element={<ProtectedRoute component={DayPage} />} />
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/register' element={<Register/>}/>
           </Routes>
   );
 }
