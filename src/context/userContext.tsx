@@ -28,7 +28,7 @@ const UserProvider = ({children}:{children:any}) =>{
        
         console.log(window.location.href)
         console.log(location.pathname)
-        if(location.pathname !== '/keepinmind/forgot-password' && location.pathname !== '/keepinmind/login' && location.pathname !== '/keepinmind/register' && location.pathname !== '/keepinmind/'){
+        if(location.pathname !== '/keepinmind/forgot-password' && location.pathname !== '/keepinmind/login' && location.pathname !== '/keepinmind/register' && location.pathname !== '/keepinmind'){
             try {
                 console.log('here')
                 const result = await axios.post(`${process.env.REACT_APP_API_URL}/get-profile`, {}, {
