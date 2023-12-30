@@ -26,6 +26,7 @@ const UserProvider = ({children}:{children:any}) =>{
 
     const getUserProfile = async (retry = true) => {
        
+        console.log(window.location.href)
         console.log(location.pathname)
         if(location.pathname !== '/forgot-password' && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/keepinmind/'){
             try {
