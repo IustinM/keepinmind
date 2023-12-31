@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/keepinmind/static/css/main.e332570d.css",
-    "main.js": "/keepinmind/static/js/main.e0807840.js",
+    "main.js": "/keepinmind/static/js/main.ffc689cb.js",
     "index.html": "/keepinmind/index.html",
     "main.e332570d.css.map": "/keepinmind/static/css/main.e332570d.css.map",
-    "main.e0807840.js.map": "/keepinmind/static/js/main.e0807840.js.map"
+    "main.ffc689cb.js.map": "/keepinmind/static/js/main.ffc689cb.js.map"
   },
   "entrypoints": [
     "static/css/main.e332570d.css",
-    "static/js/main.e0807840.js"
+    "static/js/main.ffc689cb.js"
   ]
 }
