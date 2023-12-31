@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import UserProvider from './context/UserContext';
 import PageProvider from './context/PageContainer';
 import BookProvider from './context/BookContext';
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename='/keepinmind'>
+    <HashRouter basename='/keepinmind'>
     <UserProvider>
     <DayProvider>
       <BookProvider>
@@ -26,7 +26,7 @@ root.render(
       </BookProvider>
       </DayProvider>
     </UserProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 
