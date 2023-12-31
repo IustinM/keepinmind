@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <HashRouter basename='/keepinmind'>
+    <BrowserRouter basename='/keepinmind'>
     <UserProvider>
     <DayProvider>
       <BookProvider>
@@ -26,7 +26,7 @@ root.render(
       </BookProvider>
       </DayProvider>
     </UserProvider>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

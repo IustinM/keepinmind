@@ -13,7 +13,6 @@ function App() {
 
   return (
           <Routes >
-            <Route path='/' element={<Homepage/>}/>
             <Route path='/user' element={<ProtectedRoute component={Userpage} />} />
             <Route path='/movies' element={<ProtectedRoute component={MoviePage} />} />
             <Route path='/books' element={<ProtectedRoute component={BookPage} />} />
@@ -21,6 +20,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path='/register' element={<Register/>}/>
+            <Route path='' element={<Homepage/>}/>
           </Routes>
   );
 }
