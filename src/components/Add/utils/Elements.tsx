@@ -6,6 +6,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BookContext } from '../../../context/BookContext';
 import { PageContext } from '../../../context/PageContainer';
+import { UserContext } from '../../../context/UserContext';
 
 
 import BookElement from './Element';
@@ -26,6 +27,7 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
     const navigate = useNavigate();
     //context -->
     const {editMode,setHideAddModal,setCurrentEditElement} = useContext(PageContext)
+    const {isAdmin} = useContext(UserContext)
     const {setBooksValue} = useContext(BookContext);
     //<-- context
 
@@ -34,7 +36,7 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
     //delete element handler
     const deleteElementHandler = async (retry = true) =>{
         try{
-            const deleteBook = await axios.delete(`${process.env.REACT_APP_API_URL}/${type}/${element.id}`,{
+            const deleteBook = await axios.post(`${process.env.REACT_APP_API_URL}/${type}/${element.id}`,{admin:isAdmin},{
                 withCredentials:true
             })
             if(deleteBook){
@@ -45,11 +47,15 @@ const Elements:React.FC<Props> = ({element,feelingsValue,setFeelingsValue,elemen
                     setBooksValue(booksValueAsync.data);
                     setHideAddModal(false)
                   }catch(err:any){
-                    regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
+                    if(!isAdmin){
+                        regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
+                    }
                   }
             }
         }catch(err){
-            regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
+            if(!isAdmin){
+                regenerateTokenAsync(err,deleteElementHandler,retry,navigate);
+            }
         }
         const items = [...elementsValue];
         const filterItems = items.filter(item =>{

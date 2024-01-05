@@ -14,7 +14,7 @@ import LoadingCircle from '../../components/utils/LoadingCircle'
 const Userpage:React.FC = () => {
 
     const navigate = useNavigate();
-    const {username,setUsername,setEmail,email} = useContext(UserContext);
+    const {username,setUsername,setEmail,email,isAdmin} = useContext(UserContext);
     // local state -->
     const [editMode,setEditMode] = useState<boolean>(false);
     const [cancelButton,setCancelButton] = useState<boolean>(true);
@@ -47,7 +47,7 @@ const Userpage:React.FC = () => {
 
     //request for logout the user
     const logoutUserHandler = async () =>{
-        try{
+        if(isAdmin){
             axios.get(`${process.env.REACT_APP_API_URL}/logout`,{
                 withCredentials:true
             }).then(result =>{
@@ -56,11 +56,26 @@ const Userpage:React.FC = () => {
                     return;
                 }
                 localStorage.removeItem('userInfo');
+                localStorage.removeItem('admin');
                 navigate('/login');
             })
-        }catch(err){
-            setError('Cannot logout user')
-            console.log(err);
+        }else{
+
+            try{
+                axios.get(`${process.env.REACT_APP_API_URL}/logout`,{
+                    withCredentials:true
+                }).then(result =>{
+                    if(result.status !== 200){
+                        console.error('Something went wrong');
+                        return;
+                    }
+                    localStorage.removeItem('userInfo');
+                    navigate('/login');
+                })
+            }catch(err){
+                setError('Cannot logout user')
+                console.log(err);
+            }
         }
     }
 
@@ -108,9 +123,11 @@ const Userpage:React.FC = () => {
     },[localUsername,username,localEmail]);
     
     useEffect(()=>{
-        getUserProfile();
-        setLocalEmail(email);
-        setLocalUsername(username);
+        if(!isAdmin){
+            getUserProfile();
+            setLocalEmail(email);
+            setLocalUsername(username);
+        }
     },[email,username])
     //<-- EFFECTS 
 

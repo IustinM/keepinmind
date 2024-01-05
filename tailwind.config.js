@@ -42,6 +42,7 @@ module.exports = {
       'black':'#000000',
       'default-red':'#D63058',
        'metal-red':'#AF0000',
+       "transparent-text":"#00000089",
        'glow-red':'#FF0000',
       'ashBlack':'#121212bf',
       'bermuda': '#78dcca',

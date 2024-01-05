@@ -63,10 +63,10 @@ export const regenerateTokenAsync = async (err:any,callback:any,retry:boolean,na
                         navigate('/login')
                     })
                 }catch(err){
-                    console.log(err);
+                    console.log('Something went wrong with regenrating the token');
                 }
             }
-            console.log(tokenError);
+            console.log('Token error');
         }
     } 
 }

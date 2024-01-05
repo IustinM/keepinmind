@@ -16,6 +16,7 @@ import {regenerateTokenAsync  } from './functions';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { variants } from './variants';
+import { UserContext } from '../../../context/UserContext';
 
 interface Props{
     title:string,
@@ -28,6 +29,7 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
   
     // context state values -->
     const {setViewMenu,setHideAddModal,editMode,setEditMode,currentEditElement} = useContext(PageContext);
+    const {isAdmin,email} = useContext(UserContext)
     
     //<-- context state values 
     const navigate = useNavigate();
@@ -49,14 +51,16 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
     const addEditElementHandler = async(retry=true) => {
         const reloadData = async () =>{
             try{
-                const valueAsync = await axios.get(`${process.env.REACT_APP_API_URL}/${title}s/`,{
+                const valueAsync = await axios.post(`${process.env.REACT_APP_API_URL}/${title}s/get-${title}s`,{admin:isAdmin,email:email},{
                   withCredentials:true
                 });
                 setElementsValue(valueAsync.data);
                 setEditMode(false);
                 setHideAddModal(false)
               }catch(err:any){
-                regenerateTokenAsync(err,addEditElementHandler,retry,navigate);
+                if(!isAdmin){
+                    regenerateTokenAsync(err,addEditElementHandler,retry,navigate);
+                }
               }
         }
         if(!editMode){
@@ -71,7 +75,9 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                         learns:JSON.stringify(learnedValues),
                         feelings:JSON.stringify(feelingsValue),
                         id:uuid(),
+                        user_email:email,
                     } ,
+                    admin:isAdmin
                     
             } : {
                 data:{
@@ -81,15 +87,19 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     dislikes:JSON.stringify(dislikesValues),
                     learns:JSON.stringify(learnedValues),
                     feelings:JSON.stringify(feelingsValue),
-                    id:uuid()
+                    id:uuid(),
+                    user_email:email,
                 } , 
+                admin:isAdmin
             },{
                 withCredentials:true
             }) 
                 reloadData();
       
     }catch(err:any){
-        regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
+        if(!isAdmin){
+            regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
+        }
     }
     }else{
         try{
@@ -103,7 +113,8 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     learns:JSON.stringify(learnedValues),
                     feelings:JSON.stringify(feelingsValue),
                     id:currentEditElement.id
-                }
+                },
+                admin:isAdmin
             } :{
                 data:{
                     title:elementTitle,
@@ -113,13 +124,16 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     learns:JSON.stringify(learnedValues),
                     feelings:JSON.stringify(feelingsValue),
                     id:currentEditElement.id
-                }
+                },
+                admin:isAdmin
             },{withCredentials:true})
             if(editElement){
                 reloadData();
             }
         }catch(err:any){
-            regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
+            if(!isAdmin){
+                regenerateTokenAsync(err,addEditElementHandler,retry,navigate)
+            }
         }
     }
     }

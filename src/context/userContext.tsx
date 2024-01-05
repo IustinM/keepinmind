@@ -17,7 +17,9 @@ const UserProvider = ({children}:{children:any}) =>{
     // console.log(location.pathname,':location')
     const [email,setEmail] = useState<string>('');
     const location = useLocation();
+    const admin = localStorage.getItem('admin');
     const [userLogged,setUserLogged] = useState<boolean>(false);
+    const [isAdmin,setIsAdmin] = useState(JSON.parse(localStorage.getItem('admin')!) === 'true' ? true : false);
     const [password,setPassword] = useState<string>('');
     const [emailRegister,setEmailRegister] = useState<string>('');
     const [passwordRegister,setPasswordRegister] = useState<string>('');
@@ -25,28 +27,40 @@ const UserProvider = ({children}:{children:any}) =>{
     const [confirmPassword,setConfirmPassword] = useState<string>('');
 
     const getUserProfile = async (retry = true) => {
-       
-        console.log(window.location.href)
-        console.log(location.pathname)
-        if(location.pathname !== '/forgot-password' && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/'){
-            try {
-                console.log('here')
-                const result = await axios.post(`${process.env.REACT_APP_API_URL}/get-profile`, {}, {
-                    withCredentials: true
-                });
-                console.log(result);
-                setUsername(result.data.username);
-                setUserLogged(true);
-                setEmail(result.data.email);
-            
-            } catch (err:any) {
-                regenerateTokenAsync(err,getUserProfile,retry,navigate)
+        if(!isAdmin){
+            if( location.pathname !== '/forgot-password' && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/'){
+                try {
+                    const result = await axios.post(`${process.env.REACT_APP_API_URL}/get-profile`, {}, {
+                        withCredentials: true
+                    });
+                    setUsername(result.data.username);
+                    setUserLogged(true);
+                    setEmail(result.data.email);
+                    
+                } catch (err:any) {
+                    regenerateTokenAsync(err,getUserProfile,retry,navigate)
+                }
             }
+        }else{
+         
+            setUsername('admin');
+            setUserLogged(true);
+            setEmail('admin');
         }
     }
     useEffect(()=>{
-        getUserProfile();
+            getUserProfile();
+        
     },[])
+    useEffect(()=>{
+       console.log('here')
+            if(admin === "true"){
+                console.log('here222')
+                setIsAdmin(true)
+            }
+        
+    },[isAdmin])
+    console.log(isAdmin)
     
     return(
         <UserContext.Provider value={{
@@ -57,6 +71,8 @@ const UserProvider = ({children}:{children:any}) =>{
             setUserLogged,
             setPassword,
             emailRegister,
+            isAdmin,
+            setIsAdmin,
             setEmailRegister,
             passwordRegister,
             setPasswordRegister,

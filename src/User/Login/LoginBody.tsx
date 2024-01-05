@@ -16,46 +16,59 @@ const LoginBody:React.FC = () => {
     const [isLoading,setIsLoading] = useState<boolean>(false);
     const [disableButton,setDisableButton] = useState<boolean>(false)
     const [error,setError] = useState<string>('');
-    const {setUserLogged,setEmail,setUsername} = useContext(UserContext);
+    const {setUserLogged,setEmail,setUsername,setIsAdmin} = useContext(UserContext);
     const {setLoadingApp} = useContext(PageContext)
     
     const submitLogin = (e:React.SyntheticEvent):void => {
-        e.preventDefault();
-        if(isValidEmail(email)){
-         
-                setIsLoading(true);
-                axios.post(`${process.env.REACT_APP_API_URL}/login`,{
-                    email:email,
-                    password:password
-                },{
-                    withCredentials:true
-                }).then((result:any) => {
-                    if(result.status !== 200){
-                        console.error('Something went wrong');
-                        return
-                    }
-                    
-                    setIsLoading(false);
-                    localStorage.setItem('userInfo',JSON.stringify('logged'));
-                    setUserLogged(true);
-                    setUsername(result.data.username);
-                    setEmail(result.data.email);
-                    setLoadingApp(true);
-                    navigate('/books');
-                    return;
-
-                }).catch((err:any) =>{
-                    console.log('here2')
-                    console.log(err)
-                setIsLoading(false);
-                if(err.response.data ){
-                    setError(err.response.data)
-                    }else{
-                    setError('Something went wrong')
-               }
-            });
+        if(email === 'admin' && password ==='admin'){
+            e.preventDefault();
+            localStorage.setItem('admin',JSON.stringify('true'));
+            setIsLoading(false);
+            localStorage.setItem('userInfo',JSON.stringify('logged'));
+            setUserLogged(true);
+            setIsAdmin(true);
+            setUsername('admin');
+            setEmail('admin');
+            setLoadingApp(true);
+            navigate('/books');
         }else{
-            setError('Please enter an valid email')
+            e.preventDefault();
+            if(isValidEmail(email)){
+            
+                    setIsLoading(true);
+                    axios.post(`${process.env.REACT_APP_API_URL}/login`,{
+                        email:email,
+                        password:password
+                    },{
+                        withCredentials:true
+                    }).then((result:any) => {
+                        if(result.status !== 200){
+                            console.error('Something went wrong');
+                            return
+                        }
+                        
+                        setIsLoading(false);
+                        localStorage.setItem('userInfo',JSON.stringify('logged'));
+                        setUserLogged(true);
+                        setUsername(result.data.username);
+                        setEmail(result.data.email);
+                        setLoadingApp(true);
+                        navigate('/books');
+                        return;
+
+                    }).catch((err:any) =>{
+                        console.log('here2')
+                        console.log(err)
+                    setIsLoading(false);
+                    if(err.response.data ){
+                        setError(err.response.data)
+                        }else{
+                        setError('Something went wrong')
+                }
+                });
+            }else{
+                setError('Please enter an valid email')
+            }
         }
     };
  
@@ -70,15 +83,16 @@ const LoginBody:React.FC = () => {
     },[email,password])
 
   return (
-    <div className='w-[330px] h-[400px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
+    <div className='w-[330px] h-[450px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
         <div className="flex justify-center">
             <h2 className="text-[1.4rem] mt-[1rem]">Sign in</h2>
         </div>
-        <div className="my-[0.5rem] w-[80%] mx-auto ">
+        
+        <div className="my-[2rem] w-[85%] mx-auto ">
             {error?
                 <FormError text={error}/> 
                 :
-                <div className='h-[30px]'></div>
+                <div className='h-[30px] text-[0.8rem] text-transparent-text '>Use "admin" for both email and password for demo. </div>
             }
         </div>
         <form onSubmit={submitLogin} className=" my-[1rem] w-[85%] mx-auto ">
