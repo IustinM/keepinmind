@@ -21,12 +21,12 @@ const PageNavigation = () => {
 
   return (
     <div className='mdx:py-[1rem] flex items-center'>
-        <div className="flex  items-center text-[1.8rem] ">
+        <div className="flex  items-center text-[1.8rem] md:text-[1.2rem] ">
         <FontAwesomeIcon className='mr-2 text-default-red ' icon={faBrain}/>
         <h2>KeepInMind</h2>
       </div>
       <div className="w-[100px] ml-[2rem]">
-          <button  onClick={navigateDemoHandler}  className='w-full bg-default-red h-[50px] hover:bg-metal-red transition-all text-white rounded-[0.5rem]'>Demo</button>
+          <button  onClick={navigateDemoHandler}  className='w-full bg-default-red h-[50px] hover:bg-metal-red transition-all md:text-[0.9rem] text-white rounded-[0.5rem]'>Demo</button>
       </div>
     </div>
   )

@@ -26,7 +26,7 @@ const Homepage = () => {
                 <p className='text-[1.2rem] w-[90%] mdx:text-[1rem]'>If you are tired of doing something and forget most of that thing, then you are in the right place. KeepInMind is an application that will help you to keep up with every information you think is important for you. Reading a book, watching a movie or doing something in a day will be stored not in your brain but in your device's one. </p>
                 <Link to='/register'>
                     <div className="w-[300px] mdx:w-[80%] mt-[2rem]">
-                        <button   className='w-full bg-default-red h-[50px] hover:bg-metal-red transition-all text-white rounded-[0.5rem]'>Register and try now the app</button>
+                        <button   className='w-full bg-default-red h-[50px] md:text-[0.9rem] hover:bg-metal-red transition-all text-white rounded-[0.5rem]'>Register and try now the app</button>
                     </div>
                 </Link>
             </div>

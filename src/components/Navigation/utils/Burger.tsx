@@ -12,7 +12,7 @@ const Burger:React.FC<Props> = ({setHideBurgerNav,hideBurgerNav}) => {
     },[])
 
   return (
-    <div onClick={() => setHideBurgerNav(!hideBurgerNav)} className="hidden cursor-pointer lg:block mx-[2rem]">
+    <div onClick={() => setHideBurgerNav(!hideBurgerNav)} className="hidden cursor-pointer lg:block mx-[2rem] md:mx-[1rem]">
   
         <div className="">
             <div className={`w-[30px] h-[3px] rounded-[1rem] ${!hideBurgerNav ? 'rotate-45 translate-y-[3px]' : ''} transition-all   bg-white `}></div>

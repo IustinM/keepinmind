@@ -13,7 +13,7 @@ const Menu = () => {
       }
       
   return (
-        <motion.div variants={hiddenTranslateVariant(0)} animate={'show'} initial='hidden' exit='exit' className='bg-[#0000005f] text-[#ffffff] rounded-[0.5rem] mb-2 text-[1.2rem] w-[170px] flex flex-col justify-around '>
+        <motion.div variants={hiddenTranslateVariant(0)} animate={'show'} initial='hidden' exit='exit' className='bg-[#0000005f] text-[#ffffff] rounded-[0.5rem] mb-2 text-[1.2rem] w-[170px] sm:w-full flex flex-col justify-around '>
             <div onClick={sortItemsHandler} className={`border-b-[1px] ${sorted ? 'text-sky-blue bg-[#ffffffc8]' : 'text-white hover:bg-[#ffffffc8] hover:text-[#0000004f]'} cursor-pointer flex justify-between transition-all  rounded-t-[0.5rem] border-[#ffffff50] py-3`}>
                 <span className='px-3'>Sort items</span>
                 <FontAwesomeIcon className='px-3 mr-2' icon={faSort}/>

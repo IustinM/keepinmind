@@ -181,34 +181,34 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
     //<-- EFFECTS
 
     return (
-        <motion.div variants={variants} animate={'show'} initial='hidden' exit='exit' className='w-[80%] mx-auto '>
+        <motion.div variants={variants} animate={'show'} initial='hidden' exit='exit' className='w-[80%] md:w-full mx-auto '>
             <div className=" flex lg:w-[80%] lg:mx-auto mt-[1rem] flex-col ">
                 <div onClick={()=>setHideAddModal(false)} className=" px-2 flex items-center p-[0.3rem] rounded-[0.3rem] cursor-pointer ">
                     <FontAwesomeIcon icon={faArrowLeft}/>
                     <span className='mx-[0.5rem]'>Get back</span>
                 </div>
-                <h1 className=' text-[2.5rem] mb-7'>Add a new {title}</h1>
+                <h1 className=' text-[2.5rem] mdx:text-[1.5rem] mt-[1rem] mb-7'>Add a new {title}</h1>
             </div>
             <div className="flex lg:flex-col lg:items-center  justify-between ">
                 <div className=" lg:w-[80%] lg:mx-auto ">
                 <div className="w-[400px] lg:w-full">
                     <div className="mb-7">
-                        <p className='mb-2 text-[1.2rem]'>Title of {title}</p>
+                        <p className='mb-2 text-[1.2rem] md:text-[1rem]'>Title of {title}</p>
                         <Input labelText={'Title'} inputId={`title_${title}`} inputValue={elementTitle} setInputValue={setElementTitle} />
                     </div>
                     {authorInput &&
                     <div className="">
-                        <p className='mb-2 text-[1.2rem]'>Author of {title}</p>
+                        <p className='mb-2 text-[1.2rem] md:text-[1rem]'>Author of {title}</p>
                         <Input labelText={'Author'} inputId={`author_${title}`} inputValue={titleAuthor} setInputValue={setTitleAuthor} />
                     </div>
                     }
                     <div className="mt-7">
-                        <p className='mb-2 text-[1.2rem]'>Description of {title}</p>
+                        <p className='mb-2 text-[1.2rem] md:text-[1rem]'>Description of {title}</p>
                         <Textarea inputValue={elementDescription} setInputValue={setElementDescription} labelText={'Description'} inputId={`description_${title}`}/>
                     </div>
                 </div>
                 <h2 className=' mt-4 text-[1.2rem]'>Feelings</h2>
-                <div className=" flex flex-wrap w-[400px] ">
+                <div className=" flex flex-wrap w-[400px] md:w-full ">
                     {feelingList.map((feeling:{type:string,color:string,id:string}) =><Feeling key={feeling.id} feeling={feeling}  feelingsValue={feelingsValue} setFeelingsValue={setFeelingsValue}/>)}
                     <AddFelling />
                 </div>
@@ -222,7 +222,7 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                 <div className="lg:w-[80%] w-[400px] lg:mx-auto ">
                     <div className="">
                         <div className="">
-                            <p className='mb-2 text-[1.2rem]'>What I enjoyed about this {title}</p>
+                            <p className='mb-2 text-[1.2rem] md:text-[1rem]'>What I enjoyed about this {title}</p>
                             <AddText labelText={'What i enjoyed'} inputId={'enjoyed'} localValues={enjoysValues} setLocalValues={setEnjoysValues}/>
                         </div>
                         <div className="">
@@ -233,7 +233,7 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     </div>
                     <div className="my-7">
                         <div className="">
-                            <p className='mb-2 text-[1.2rem]'>What I dislike about this {title}</p>
+                            <p className='mb-2 text-[1.2rem] md:text-[1rem]'>What I dislike about this {title}</p>
                             <AddText  labelText={'What i dislike'} inputId={'dislikes'} localValues={dislikesValues} setLocalValues={setDislikesValues}/>
                         </div>
                         <div className="">
@@ -244,7 +244,7 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     </div>
                     <div className="">
                         <div className="">
-                            <p className='mb-2 text-[1.2rem]'>What I learned from this {title}</p>
+                            <p className='mb-2 text-[1.2rem] md:text-[1rem]'>What I learned from this {title}</p>
                             <AddText labelText={'What i learned'} inputId={'learns'} localValues={learnedValues} setLocalValues={setLearnedValues}/>
                         </div>
                         <div className="">
@@ -256,8 +256,8 @@ const AddModal:React.FC<Props> = ({title,setElementsValue,authorInput}) => {
                     {/* <EditColumn/> */}
                 </div>
             </div>
-            <div className=" flex justify-center mt-[2rem] mb-[1rem] ">
-                <button onClick={() => addEditElementHandler()} disabled={disableAddButton} className={`w-[200px] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-disabledButtonRed'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
+            <div className=" flex justify-center mt-[2rem] mb-[1rem] md:mb-[5rem] ">
+                <button onClick={() => addEditElementHandler()} disabled={disableAddButton} className={`w-[200px] md:w-[80%] ${!disableAddButton ? 'bg-default-red hover:bg-metal-red cursor-pointer' : 'bg-disabledButtonRed'} h-[50px] transition-all text-white rounded-[0.5rem]`}>
                   {editMode ? `Edit ${title}`:  `Add ${title}`}
                 </button>
             </div>

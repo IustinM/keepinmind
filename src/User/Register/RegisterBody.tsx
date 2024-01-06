@@ -66,12 +66,16 @@ const RegisterBody:React.FC = () => {
         }
         setUserExists(false);
         setError('')
-    },[username,emailRegister,passwordRegister,confirmPassword])
+    },[username,emailRegister,passwordRegister,confirmPassword]);
+
+    useEffect(() => {
+        setUsername('');
+    },[])
 
   return (
-    <div className='w-[360px] h-[550px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
+    <div className='w-[360px] h-[550px] border-[1px] shadow-md sm:border-0 sm:shadow-none  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
         <div className="flex justify-center">
-            <h2 className="text-[1.4rem] mt-[1rem]">Sign in</h2>
+            <h2 className="text-[1.4rem] mt-[1rem]">Register</h2>
         </div>
         <div className="my-[0.5rem] w-[80%] mx-auto ">
             {userExists ?<FormError text='User already exists!'/> 

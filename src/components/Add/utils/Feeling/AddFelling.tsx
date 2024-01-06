@@ -31,7 +31,7 @@ const AddFelling:React.FC =memo(({}) => {
     return (
       <div 
         style={{background:backgroundColor}}
-        className="flex min-h-[40px] cursor-pointer items-center transition-all w-[140px] relative  mr-[0.5rem]  rounded-[0.5rem] justify-center mt-3 text-white">
+        className="flex min-h-[40px] md:text-[0.9rem] cursor-pointer items-center transition-all w-[140px] relative  mr-[0.5rem]  rounded-[0.5rem] justify-center mt-3 text-white">
             <input
            
             style={{background:backgroundColor}}

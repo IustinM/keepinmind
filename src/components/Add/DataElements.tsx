@@ -18,7 +18,8 @@ const DataElements:React.FC<Props> = ({title,elementsValue,setElementsValue,feel
   
   return (
     <div>
-        <h2 className="text-[3rem] w-[85%] mx-auto mt-[2rem]">{title}</h2>
+        <h2 className="text-[3rem] w-[85%] mx-auto mt-[2rem] lg 
+         placeholder::text-[2rem] md:text-[1.6rem] ">{title}</h2>
         <div className="">
           {
           elementsValue.length > 0 ?

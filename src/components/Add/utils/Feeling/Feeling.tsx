@@ -43,7 +43,7 @@ const Feeling:React.FC<Props> = ({feeling,disable,trash,feelingsValue,setFeeling
     <div 
     onClick={setFeelingHandler}
     style={{background:feeling.color}}
-    className="flex min-h-[40px] items-center  mr-[0.5rem] py-[0.5rem] cursor-pointer px-[1rem] rounded-[0.5rem] justify-center mt-3 text-white">
+    className="flex min-h-[40px] md:text-[0.9rem]  items-center  mr-[0.5rem] py-[0.5rem] cursor-pointer px-[1rem] rounded-[0.5rem] justify-center mt-3 text-white">
         <span>{feeling.type} </span>
         {trash && <FontAwesomeIcon onClick={deleteFeelingHandler} className='mx-2 ' icon={faTrash}/>}
     </div>

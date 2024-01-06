@@ -83,7 +83,7 @@ const LoginBody:React.FC = () => {
     },[email,password])
 
   return (
-    <div className='w-[330px] h-[450px] border-[1px] shadow-md  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
+    <div className='w-[330px] h-[450px] border-[1px] shadow-md sm:border-0 sm:shadow-none  border-[#8686866e] rounded-[0.3rem] border-textInputGrey'>
         <div className="flex justify-center">
             <h2 className="text-[1.4rem] mt-[1rem]">Sign in</h2>
         </div>

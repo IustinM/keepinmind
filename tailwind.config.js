@@ -25,6 +25,7 @@ module.exports = {
       // => @media (max-width: 767px) { ... }
 
       'sm': {'max': '539px'},
+      'vsm': {'max': '439px'},
       // => @media (max-width: 639px) { ... }
     },
     colors: {
