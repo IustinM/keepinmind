@@ -29,6 +29,7 @@ const MoviePage:React.FC = () => {
         withCredentials:true
       })
       setErrorMessage('');
+      setIsLoading(false)
       setMoviesValues(moviesValueAsync.data)
     }catch(err:any){
       setErrorMessage('Something went wrong');
